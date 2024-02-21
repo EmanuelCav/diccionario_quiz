@@ -1,7 +1,7 @@
 import { SetStateAction } from "react";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
-import { IOptions } from '../interface/User';
+import { ICategory, IOptions } from '../interface/User';
 import { TextOptions } from "./key.types";
 
 type Routes = {
@@ -33,4 +33,16 @@ export type OptionGamePropsType = {
     text: TextOptions;
     amountOptions: string;
     func: (value: TextOptions) => void;
+}
+
+export type ShowCategoriesPropsType = {
+    categories: ICategory[];
+    changeCategoryAction: (changeCategory: (category: ICategory) => void, category: ICategory) => void;
+    changeCategory: (category: ICategory) => void;
+}
+
+export type CategoryPropsType = {
+    category: ICategory;
+    changeCategoryAction: (changeCategory: (category: ICategory) => void, category: ICategory) => void;
+    changeCategory: (category: ICategory) => void;
 }

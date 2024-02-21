@@ -7,6 +7,7 @@ export interface IUser {
     showLetters: number;
     showOptions: number;
     changeOptions: (optionsData: IOptions) => void;
+    changeCategory: (category: ICategory) => void;
 }
 
 export interface ICategory {

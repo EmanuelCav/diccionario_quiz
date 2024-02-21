@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import { IOptions, IUser } from '../../interface/User'
+import { ICategory, IOptions, IUser } from '../../interface/User'
 
 export const userStore = create<IUser>()((set) => ({
     amountOptions: 'Sin opciones',
@@ -31,5 +31,13 @@ export const userStore = create<IUser>()((set) => ({
     changeOptions: (optionsData: IOptions) => set(() => ({
         amountOptions: optionsData.amountOptions,
         amountQuestions: optionsData.amountQuestions
+    })),
+    changeCategory: (category: ICategory) => set((state) => ({
+        categories: state.categories.map((c) => category.category === c.category ? {
+            category: category.category,
+            corrects: category.corrects,
+            isSelect: !category.isSelect,
+            questions: category.questions
+        } : c)
     }))
 }))
