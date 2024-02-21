@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 
-import { IUser } from '../../interface/User'
+import { IOptions, IUser } from '../../interface/User'
 
-export const userStore = create<IUser>(() => ({
-    amountOptions: 4,
+export const userStore = create<IUser>()((set) => ({
+    amountOptions: 'Sin opciones',
     amountQuestions: 10,
     categories: [{
         category: "Sustantivos",
@@ -27,5 +27,9 @@ export const userStore = create<IUser>(() => ({
         questions: 0
     }],
     showLetters: 3,
-    showOptions: 3
+    showOptions: 3,
+    changeOptions: (optionsData: IOptions) => set(() => ({
+        amountOptions: optionsData.amountOptions,
+        amountQuestions: optionsData.amountQuestions
+    }))
 }))
