@@ -7,11 +7,16 @@ import Menu from '../components/home/Menu'
 
 import { StackNavigation } from '../types/props.types'
 
+import { userStore } from '../server/user/store'
+
 const Home = ({ navigation }: { navigation: StackNavigation }) => {
+
+  const { categories } = userStore()
+
   return (
     <View style={generalStyles.containerGeneral}>
       <Banner />
-      <Menu navigation={navigation} />
+      <Menu navigation={navigation} categories={categories} />
     </View>
   )
 }

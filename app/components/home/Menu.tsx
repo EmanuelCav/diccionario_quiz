@@ -4,16 +4,25 @@ import { homeStyles } from '../../styles/home.styles'
 
 import ButtonMenu from './components/ButtonMenu'
 
-import { StackNavigation } from '../../types/props.types'
+import { MenuPropsType } from '../../types/props.types'
 
-const Menu = ({ navigation }: { navigation: StackNavigation }) => {
+const Menu = ({ navigation, categories }: MenuPropsType) => {
 
     const redirectPlaying = () => {
-        navigation.navigate('Playing')
+        if(categories.filter(c => c.isSelect).length > 0) {
+            navigation.navigate('Playing')
+            return
+        }
+
+        navigation.navigate("Categories", {
+            isCategory: false
+        })
     }
 
     const redirectCategories = () => {
-        navigation.navigate('Categories')
+        navigation.navigate('Categories', {
+            isCategory: true
+        })
     }
 
     const redirectOptions = () => {

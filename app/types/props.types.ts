@@ -1,22 +1,38 @@
 import { SetStateAction } from "react";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { RouteProp } from "@react-navigation/native";
 
 import { ICategory, IOptions } from '../interface/User';
 import { TextOptions } from "./key.types";
+import { IQuestion } from "../interface/Game";
 
 type Routes = {
     Home: undefined;
     Playing: undefined;
     Options: undefined;
-    Categories: undefined;
+    Categories: {
+        isCategory: boolean;
+    };
     Statistics: undefined;
 }
 
 export type StackNavigation = NativeStackNavigationProp<Routes>;
 
+export type CategoriesRouteType = RouteProp<Routes, 'Categories'>
+
 export type ButtonMenuPropsType = {
     text: string;
     func: () => void;
+}
+
+export type CategoriesPropsType = {
+    navigation: StackNavigation;
+    route: CategoriesRouteType;
+}
+
+export type MenuPropsType = {
+    navigation: StackNavigation;
+    categories: ICategory[];
 }
 
 export type AmountQuestionsPropsType = {
@@ -45,4 +61,49 @@ export type CategoryPropsType = {
     category: ICategory;
     changeCategoryAction: (changeCategory: (category: ICategory) => void, category: ICategory) => void;
     changeCategory: (category: ICategory) => void;
+}
+
+export type GameStatisticsPropsType = {
+    numberQuestion: number;
+    questions: number;
+    isCorrect: boolean;
+    isIncorrect: boolean;
+    isFinish: boolean;
+    isPreFinish: boolean;
+}
+
+export type AnswerPropsType = {
+    answer: boolean;
+    correctAnswer: string;
+    continueGame: () => void;
+}
+
+export type FinishPropsType = {
+    corrects: number;
+    questions: number;
+    showErrors: () => void;
+    continueHome: () => void;
+    isGameError: boolean;
+}
+
+export type StatisticsFinishPropsType = {
+    corrects: number;
+    questions: number;
+}
+
+export type ActionsFinishPropsType = {
+    areErrors: boolean; 
+    showErrors: () => void;
+    continueHome: () => void;
+}
+
+export type SectionOptionsPropsTypes = {
+    options: string[]; 
+    amountOptions: string; 
+    nextQuestion: (value: string) => void;
+}
+
+export type QuestionGameStatisticsPropsType = {
+    questions: number; 
+    numberQuestion: number;
 }

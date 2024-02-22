@@ -8,6 +8,8 @@ export interface IUser {
     showOptions: number;
     changeOptions: (optionsData: IOptions) => void;
     changeCategory: (category: ICategory) => void;
+    countQuestion: (category: ICategory) => void;
+    correctQuestion: (category: ICategory) => void;
 }
 
 export interface ICategory {

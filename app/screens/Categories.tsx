@@ -4,14 +4,14 @@ import ButtonAccept from '../components/components/ButtonAccept'
 import TitleCategories from '../components/categories/TitleCategories'
 import ShowCategories from '../components/categories/ShowCategories'
 
-import { StackNavigation } from '../types/props.types'
+import { CategoriesPropsType } from '../types/props.types'
 
 import { userStore } from '../server/user/store'
 import { changeCategoryAction } from '../server/actions/user.actions'
 
 import { generalStyles } from '../styles/general.styles'
 
-const Categories = ({ navigation }: { navigation: StackNavigation }) => {
+const Categories = ({ navigation, route }: CategoriesPropsType) => {
 
     const { categories, changeCategory } = userStore()
 
@@ -23,7 +23,7 @@ const Categories = ({ navigation }: { navigation: StackNavigation }) => {
         <View style={generalStyles.containerGeneral}>
             <TitleCategories />
             <ShowCategories categories={categories} changeCategoryAction={changeCategoryAction} changeCategory={changeCategory} />
-            <ButtonAccept text='ACEPTAR' func={goBack} />
+            <ButtonAccept text={route.params.isCategory ? 'ACEPTAR' : 'INICIAR'} func={goBack} />
         </View>
     )
 }

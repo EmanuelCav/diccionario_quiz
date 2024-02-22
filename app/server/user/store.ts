@@ -39,5 +39,21 @@ export const userStore = create<IUser>()((set) => ({
             isSelect: !category.isSelect,
             questions: category.questions
         } : c)
-    }))
+    })),
+    countQuestion: (category: ICategory) => set((state) => ({
+        categories: state.categories.map((c) => category.category === c.category ? {
+            category: category.category,
+            corrects: category.corrects,
+            isSelect: category.isSelect,
+            questions: category.questions + 1
+        } : c)
+    })),
+    correctQuestion: (category: ICategory) => set((state) => ({
+        categories: state.categories.map((c) => category.category === c.category ? {
+            category: category.category,
+            corrects: category.corrects + 1,
+            isSelect: category.isSelect,
+            questions: category.questions
+        } : c)
+    })),
 }))
