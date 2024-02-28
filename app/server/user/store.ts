@@ -4,7 +4,7 @@ import { ICategory, IOptions, IUser } from '../../interface/User'
 
 export const userStore = create<IUser>()((set) => ({
     amountOptions: 'Sin opciones',
-    amountQuestions: 10,
+    amountQuestions: 5,
     categories: [{
         category: "Sustantivos",
         corrects: 0,
@@ -40,20 +40,20 @@ export const userStore = create<IUser>()((set) => ({
             questions: category.questions
         } : c)
     })),
-    countQuestion: (category: ICategory) => set((state) => ({
-        categories: state.categories.map((c) => category.category === c.category ? {
-            category: category.category,
-            corrects: category.corrects,
-            isSelect: category.isSelect,
-            questions: category.questions + 1
+    countQuestion: (category: string) => set((state) => ({
+        categories: state.categories.map((c) => category === c.category ? {
+            category: c.category,
+            corrects: c.corrects,
+            isSelect: c.isSelect,
+            questions: c.questions + 1
         } : c)
     })),
-    correctQuestion: (category: ICategory) => set((state) => ({
-        categories: state.categories.map((c) => category.category === c.category ? {
-            category: category.category,
-            corrects: category.corrects + 1,
-            isSelect: category.isSelect,
-            questions: category.questions
+    correctQuestion: (category: string) => set((state) => ({
+        categories: state.categories.map((c) => category === c.category ? {
+            category: c.category,
+            corrects: c.corrects + 1,
+            isSelect: c.isSelect,
+            questions: c.questions
         } : c)
     })),
 }))

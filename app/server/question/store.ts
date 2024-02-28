@@ -1,7 +1,10 @@
 import { create } from "zustand";
 
-import { IGame } from "../../interface/Game";
+import { IGame, IQuestion } from "../../interface/Game";
 
-export const gameStore = create<IGame>()(() => ({
-    questions: []
+export const gameStore = create<IGame>()((set) => ({
+    questions: [],
+    generateGame: (question: IQuestion) => set((state) => ({
+        questions: [...state.questions, question]
+    }))
 }))

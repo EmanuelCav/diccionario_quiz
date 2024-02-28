@@ -32,7 +32,7 @@ const Options = ({ navigation }: { navigation: StackNavigation }) => {
         <View style={generalStyles.containerGeneral}>
             <AmountOptions amountOptions={optionsData.amountOptions} setOptionsData={setOptionsData} />
             <AmountQuestions amountQuestions={optionsData.amountQuestions} setOptionsData={setOptionsData} />
-            <ButtonAccept text='ACEPTAR' func={goBack} />
+            <ButtonAccept text='ACEPTAR' func={goBack} disabled={false} />
         </View>
     )
 }

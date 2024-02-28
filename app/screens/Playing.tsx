@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
-import { BackHandler, View } from 'react-native'
+import { BackHandler, View, Text } from 'react-native'
 // import { InterstitialAd, AdEventType, TestIds } from 'react-native-google-mobile-ads';
 // import { EXPO_INTERSTITIAL } from '@env';
 
-// import allQuestions from '../../assets/questions.json'
-
-// import { UserContext } from '../server/context/user.context'
-// import { GameContext } from '../server/context/game.context'
+import allQuestions from '../../assets/questions.json'
 
 import { IGame, IQuestion } from '../interface/Game'
 import { IUser } from '../interface/User'
@@ -24,12 +21,11 @@ import { generalStyles } from '../styles/general.styles'
 import { userStore } from '../server/user/store'
 import { gameStore } from '../server/question/store'
 
-// import { correctCategory, countCategory } from '../helper/playing'
-// import { emptyOptions } from '../helper/game'
+import { emptyOptions } from '../helper/game'
 
 const Playing = ({ navigation }: { navigation: StackNavigation }) => {
 
-    const { categories, amountOptions } = userStore()
+    const { categories, amountOptions, correctQuestion, countQuestion } = userStore()
     const { questions } = gameStore()
 
     const [numberQuestion, setNumberQuestion] = useState<number>(0)
@@ -91,21 +87,21 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
     }
 
     const continueHome = () => {
-        // const optionsAllQuestions = allQuestions.filter((aq) => aq.options.length > 0)
-        // emptyOptions(optionsAllQuestions)
+        const optionsAllQuestions = allQuestions.filter((aq) => aq.options.length > 0)
+        emptyOptions(optionsAllQuestions)
         // interstitial.show()
         navigation.navigate('Home')
     }
 
     useEffect(() => {
         if (!isGameError) {
-            // categoryAction!(countCategory(categories, questions[numberQuestion].category))
+            countQuestion(questions[numberQuestion].category)
         }
     }, [numberQuestion])
 
     useEffect(() => {
         if (isCorrect && !isGameError) {
-            // categoryAction!(correctCategory(categories, questions[numberQuestion].category))
+            correctQuestion(questions[numberQuestion].category)
         }
     }, [corrects])
 
@@ -123,7 +119,7 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
             {
                 (isCorrect || isIncorrect) ?
                     <Answer answer={isCorrect} correctAnswer={!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer} continueGame={continueGame} />
-                    :
+                    : amountOptions === 'Sin opciones' ? <Text>Teclado</Text> :
                     <Options options={!isGameError ? questions[numberQuestion].options : gameErrors[numberQuestion].options} nextQuestion={nextQuestion} amountOptions={amountOptions} />
             }
             {

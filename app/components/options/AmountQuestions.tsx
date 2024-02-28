@@ -14,15 +14,15 @@ const AmountQuestions = ({ amountQuestions, setOptionsData }: AmountQuestionsPro
             <Slider
                 style={{ width: '100%' }}
                 thumbTintColor='#f1889b'
-                minimumValue={5}
-                maximumValue={30}
+                minimumValue={1}
+                maximumValue={10}
                 value={amountQuestions}
                 minimumTrackTintColor="#f1889b"
                 maximumTrackTintColor="#f99aaa"
                 onValueChange={(value) => setOptionsData((optionData: IOptions) => ({
                     ...optionData, amountQuestions: value
                 }))}
-                step={5}
+                step={1}
                 accessibilityRole={undefined}
             />
         </View>

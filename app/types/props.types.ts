@@ -25,6 +25,12 @@ export type ButtonMenuPropsType = {
     func: () => void;
 }
 
+export type ButtonAcceptPropsType = {
+    text: string;
+    func: () => void;
+    disabled: boolean;
+}
+
 export type CategoriesPropsType = {
     navigation: StackNavigation;
     route: CategoriesRouteType;
@@ -33,6 +39,9 @@ export type CategoriesPropsType = {
 export type MenuPropsType = {
     navigation: StackNavigation;
     categories: ICategory[];
+    generateGame: (question: IQuestion) => void; 
+    amountQuestions: number; 
+    amountOptions: TextOptions;
 }
 
 export type AmountQuestionsPropsType = {
@@ -47,7 +56,7 @@ export type AmountOptionsPropsType = {
 
 export type OptionGamePropsType = {
     text: TextOptions;
-    amountOptions: string;
+    amountOptions: TextOptions;
     func: (value: TextOptions) => void;
 }
 
@@ -99,7 +108,7 @@ export type ActionsFinishPropsType = {
 
 export type SectionOptionsPropsTypes = {
     options: string[]; 
-    amountOptions: string; 
+    amountOptions: TextOptions; 
     nextQuestion: (value: string) => void;
 }
 

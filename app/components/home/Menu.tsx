@@ -1,20 +1,24 @@
 import { View } from 'react-native'
 
+import allQuestions from '../../../assets/questions.json'
+
 import { homeStyles } from '../../styles/home.styles'
 
 import ButtonMenu from './components/ButtonMenu'
 
 import { MenuPropsType } from '../../types/props.types'
 
-const Menu = ({ navigation, categories }: MenuPropsType) => {
+import { generateGameAction } from '../../server/actions/game.actions'
+
+const Menu = ({ navigation, categories, amountOptions, amountQuestions, generateGame }: MenuPropsType) => {
 
     const redirectPlaying = () => {
-        if(categories.filter(c => c.isSelect).length > 0) {
-            navigation.navigate('Playing')
+        if (categories.filter(c => c.isSelect).length > 0) {
+            generateGameAction(allQuestions, navigation, amountOptions, amountQuestions, generateGame, categories)
             return
         }
 
-        navigation.navigate("Categories", {
+        navigation.navigate('Categories', {
             isCategory: false
         })
     }

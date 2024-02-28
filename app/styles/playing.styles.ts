@@ -3,25 +3,27 @@ import { Dimensions, StyleSheet } from "react-native";
 export const playingStyles = StyleSheet.create({
 
     containerQuestion: {
-        height: '50%',
-        backgroundColor: '#5dc1b9',
+        height: '48%',
+        backgroundColor: '#f99aaa',
         borderStyle: 'solid',
         borderWidth: 3,
         borderColor: '#ffffff',
         paddingHorizontal: Dimensions.get("window").width / 60,
         paddingVertical: Dimensions.get("window").height / 123,
-        width: '100%'
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 
     textQuestionText: {
-        fontSize: Dimensions.get("window").height / 33,
+        fontSize: Dimensions.get("window").height / 37,
         color: '#ffffff',
         fontWeight: '500',
         textAlign: 'center'
     },
 
     containerGameStatistics: {
-        height: '8%',
+        height: '10%',
         justifyContent: 'space-around',
         flexDirection: 'row',
         width: '100%',
