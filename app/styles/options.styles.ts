@@ -39,7 +39,15 @@ export const optionsStyles = StyleSheet.create({
         borderWidth: 2,
         borderColor: '#f1889b',
         borderStyle: 'solid',
-        width: '50%'
+        width: '50%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
     },
 
     optionText: {

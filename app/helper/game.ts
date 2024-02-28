@@ -1,6 +1,10 @@
 import { IQuestion } from "../interface/Game";
 import { ICategory } from "../interface/User";
 
+export const keyboard: string[][] = [['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'],
+['Z', 'X', 'C', 'V', 'B', 'N', 'M', '←', '[X]']]
+
 export const generateQuestions = (categories: ICategory[], allQuestions: IQuestion[], amountQuestions: number): IQuestion[] => {
 
     let avaibleQuestions: IQuestion[] = []

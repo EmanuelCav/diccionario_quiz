@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from "react-native";
 export const playingStyles = StyleSheet.create({
 
     containerQuestion: {
-        height: '48%',
+        height: '45%',
         backgroundColor: '#f99aaa',
         borderStyle: 'solid',
         borderWidth: 3,
@@ -12,7 +12,15 @@ export const playingStyles = StyleSheet.create({
         paddingVertical: Dimensions.get("window").height / 123,
         width: '100%',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
     },
 
     textQuestionText: {
@@ -23,11 +31,25 @@ export const playingStyles = StyleSheet.create({
     },
 
     containerGameStatistics: {
-        height: '10%',
-        justifyContent: 'space-around',
-        flexDirection: 'row',
+        height: '15%',
+        justifyContent: 'space-evenly',
+        flexDirection: 'column',
         width: '100%',
         alignItems: 'center'
+    },
+
+    containerQuestionGameStatistics: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
+
+    containerHelps: {
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        flexDirection: 'row'
     },
 
     textGameStatistics: {
@@ -36,11 +58,25 @@ export const playingStyles = StyleSheet.create({
         fontWeight: '500'
     },
 
+    textInputOption: {
+        fontSize: Dimensions.get("window").height / 41,
+        color: '#f99aaa',
+        fontWeight: '600'
+    },
+
     containerOptions: {
         width: '100%',
         justifyContent: 'flex-start',
         alignItems: 'flex-start',
         flexDirection: 'row',
+        flex: 1
+    },
+
+    containerKeyboard: {
+        width: '100%',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
+        flexDirection: 'column',
         flex: 1
     },
 
@@ -159,6 +195,109 @@ export const playingStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%'
+    },
+
+    containerHelpButton: {
+        padding: Dimensions.get("window").height / 106,
+        borderColor: '#ffffff',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'row',
+        width: '45%',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+    },
+
+    containIconHelpButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+
+    containerInputKeyboard: {
+        height: '25%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%'
+    },
+
+    containerTextKeyboard: {
+        height: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        flexDirection: 'column'
+    },
+
+    containSectionKeys: {
+        width: '100%',
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+
+    buttonKey: {
+        padding: Dimensions.get("window").height / 106,
+        borderColor: '#ffffff',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        width: Dimensions.get("window").width / 11,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+    },
+
+    textButtonKey: {
+        fontSize: Dimensions.get("window").height / 46,
+        fontWeight: '600',
+        color: '#ffffff',
+    },
+
+    containerShowInput: {
+        width: '70%',
+        padding: Dimensions.get("window").height / 106,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomColor: '#f99aaa',
+        borderBottomWidth: 2,
+        borderStyle: 'solid',
+        backgroundColor: '#fbdae0'
+    },
+
+    containAcceptInput: {
+        padding: Dimensions.get("window").height / 106,
+        width: '20%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+        borderColor: '#ffffff',
+        borderStyle: 'solid',
+        borderWidth: 1,
     }
 
 })

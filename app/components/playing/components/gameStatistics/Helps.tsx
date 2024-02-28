@@ -1,8 +1,17 @@
-import { Text } from 'react-native'
+import { View } from 'react-native'
 
-const Helps = () => {
+import { playingStyles } from '../../../../styles/playing.styles'
+
+import HelpButton from './components/HelpButton'
+
+import { HelpsPropsType } from '../../../../types/props.types'
+
+const Helps = ({ showLetters, showOptions }: HelpsPropsType) => {
     return (
-        <Text>Helps</Text>
+        <View style={playingStyles.containerHelps}>
+            <HelpButton icon='format-letter-case' text='Letras' amount={showLetters} />
+            <HelpButton icon='clipboard-list' text='Opciones' amount={showOptions} />
+        </View>
     )
 }
 

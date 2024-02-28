@@ -22,7 +22,6 @@ const AmountOptions = ({ amountOptions, setOptionsData }: AmountOptionsPropsType
             <OptionGame text='2' amountOptions={amountOptions} func={changeOption} />
             <OptionGame text='4' amountOptions={amountOptions} func={changeOption} />
             <OptionGame text='6' amountOptions={amountOptions} func={changeOption} />
-            <OptionGame text='8' amountOptions={amountOptions} func={changeOption} />
             <OptionGame text='Sin opciones' amountOptions={amountOptions} func={changeOption} />
         </View>
     )

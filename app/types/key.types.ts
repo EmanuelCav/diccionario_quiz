@@ -1,1 +1,1 @@
-export type TextOptions = '2' | '4' | '6' | '8' | 'Sin opciones'
+export type TextOptions = '2' | '4' | '6' | 'Sin opciones';

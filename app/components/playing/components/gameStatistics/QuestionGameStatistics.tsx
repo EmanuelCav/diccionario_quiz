@@ -1,4 +1,4 @@
-import { Text } from 'react-native'
+import { Text, View } from 'react-native'
 
 import { QuestionGameStatisticsPropsType } from '../../../../types/props.types'
 
@@ -6,7 +6,10 @@ import { playingStyles } from '../../../../styles/playing.styles'
 
 const QuestionGameStatistics = ({ questions, numberQuestion }: QuestionGameStatisticsPropsType) => {
     return (
-        <Text style={playingStyles.textGameStatistics}>{numberQuestion}/{questions}</Text>
+        <View style={playingStyles.containerQuestionGameStatistics}>
+            <Text style={playingStyles.textGameStatistics}>Categoría: {questions[numberQuestion].category}</Text>
+            <Text style={playingStyles.textGameStatistics}>{numberQuestion}/{questions.length}</Text>
+        </View>
     )
 }
 

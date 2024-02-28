@@ -74,11 +74,13 @@ export type CategoryPropsType = {
 
 export type GameStatisticsPropsType = {
     numberQuestion: number;
-    questions: number;
+    questions: IQuestion[];
     isCorrect: boolean;
     isIncorrect: boolean;
     isFinish: boolean;
     isPreFinish: boolean;
+    showLetters: number;
+    showOptions: number;
 }
 
 export type AnswerPropsType = {
@@ -113,6 +115,33 @@ export type SectionOptionsPropsTypes = {
 }
 
 export type QuestionGameStatisticsPropsType = {
-    questions: number; 
+    questions: IQuestion[]; 
     numberQuestion: number;
+}
+
+export type HelpsPropsType = {
+    showLetters: number; 
+    showOptions: number;
+}
+
+export type HelpButtonPropsType = {
+    text: string;
+    icon: string;
+    amount: number;
+}
+
+export type KeyboardPropsType = {
+    handleChange: (value: string) => void;
+    input: string;
+    keyboard: string[][];
+}
+
+export type TextKeyboardPropsType = {
+    handleChange: (value: string) => void;
+    keyboard: string[][];
+}
+
+export type KeyPropsType = {
+    char: string;
+    handleChange: (value: string) => void;
 }
