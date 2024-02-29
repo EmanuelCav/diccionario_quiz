@@ -7,10 +7,10 @@ import { playingStyles } from '../../styles/playing.styles'
 
 import { KeyboardPropsType } from '../../types/props.types'
 
-const Keyboard = ({ keyboard, handleChange, input }: KeyboardPropsType) => {
+const Keyboard = ({ keyboard, handleChange, input, nextQuestion }: KeyboardPropsType) => {
     return (
         <View style={playingStyles.containerKeyboard}>
-            <InputKeyboard input={input} />
+            <InputKeyboard input={input} nextQuestion={nextQuestion} />
             <TextKeyboard keyboard={keyboard} handleChange={handleChange} />
         </View>
     )

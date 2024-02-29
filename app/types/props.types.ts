@@ -3,7 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RouteProp } from "@react-navigation/native";
 
 import { ICategory, IOptions } from '../interface/User';
-import { TextOptions } from "./key.types";
+import { HelpType, TextOptions } from "./key.types";
 import { IQuestion } from "../interface/Game";
 
 type Routes = {
@@ -75,12 +75,9 @@ export type CategoryPropsType = {
 export type GameStatisticsPropsType = {
     numberQuestion: number;
     questions: IQuestion[];
-    isCorrect: boolean;
-    isIncorrect: boolean;
-    isFinish: boolean;
-    isPreFinish: boolean;
-    showLetters: number;
-    showOptions: number;
+    isHelped: boolean;
+    helps: number;
+    handleHelp: (help: HelpType) => void;
 }
 
 export type AnswerPropsType = {
@@ -95,6 +92,8 @@ export type FinishPropsType = {
     showErrors: () => void;
     continueHome: () => void;
     isGameError: boolean;
+    handleHelp: (help: HelpType) => void;
+    isAdd: boolean;
 }
 
 export type StatisticsFinishPropsType = {
@@ -120,25 +119,26 @@ export type QuestionGameStatisticsPropsType = {
 }
 
 export type HelpsPropsType = {
-    showLetters: number; 
-    showOptions: number;
-}
-
-export type HelpButtonPropsType = {
-    text: string;
-    icon: string;
-    amount: number;
+    helps: number;
+    isHelped: boolean;
+    handleHelp: (help: HelpType) => void;
 }
 
 export type KeyboardPropsType = {
     handleChange: (value: string) => void;
     input: string;
     keyboard: string[][];
+    nextQuestion: (value: string) => void;
 }
 
 export type TextKeyboardPropsType = {
     handleChange: (value: string) => void;
     keyboard: string[][];
+}
+
+export type InputKeyboardPropsType = {
+    input: string;
+    nextQuestion: (value: string) => void;
 }
 
 export type KeyPropsType = {

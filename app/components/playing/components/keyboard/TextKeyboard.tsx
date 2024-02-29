@@ -10,8 +10,8 @@ const TextKeyboard = ({ keyboard, handleChange }: TextKeyboardPropsType) => {
     return (
         <View style={playingStyles.containerTextKeyboard}>
             {
-                keyboard.map((keys: string[]) => {
-                    return <View style={playingStyles.containSectionKeys}>
+                keyboard.map((keys: string[], index: number) => {
+                    return <View style={playingStyles.containSectionKeys} key={index}>
                         {
                             keys.map((key: string) => {
                                 return <Key handleChange={handleChange} char={key} key={key} />

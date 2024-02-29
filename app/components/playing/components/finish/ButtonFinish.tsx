@@ -6,10 +6,9 @@ import { ButtonMenuPropsType } from '../../../../types/props.types'
 
 const ButtonFinish = ({ text, func }: ButtonMenuPropsType) => {
     return (
-
         <Pressable style={({ pressed }) => [
             {
-                backgroundColor: pressed ? '#5cc197' : '#5dc1b9',
+                backgroundColor: pressed ? '#f99aaa' : '#f1889b',
             },
             playingStyles.buttonFinish
         ]}

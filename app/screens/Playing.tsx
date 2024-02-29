@@ -7,6 +7,7 @@ import allQuestions from '../../assets/questions.json'
 
 import { IQuestion } from '../interface/Game'
 import { StackNavigation } from '../types/props.types'
+import { HelpType } from '../types/key.types'
 
 import Question from '../components/playing/Question'
 import GameStatistics from '../components/playing/GameStatistics'
@@ -25,7 +26,7 @@ import { emptyOptions, keyboard } from '../helper/game'
 
 const Playing = ({ navigation }: { navigation: StackNavigation }) => {
 
-    const { categories, amountOptions, correctQuestion, countQuestion, showLetters, showOptions } = userStore()
+    const { categories, amountOptions, correctQuestion, countQuestion, helps, changeHelps } = userStore()
     const { questions } = gameStore()
 
     const [input, setInput] = useState<string>('')
@@ -38,13 +39,19 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
     const [isPreFinish, setIsPreFinish] = useState<boolean>(false)
     const [isFinish, setIsFinish] = useState<boolean>(false)
     const [isGameError, setIsGameError] = useState<boolean>(false)
+    const [isHelped, setIsHelped] = useState<boolean>(false)
+    const [isAdd, setIsAdd] = useState<boolean>(false)
+
+    const [helpType, setHelpType] = useState<HelpType>('help')
 
     const [errors, setErrors] = useState<IQuestion[]>([])
     const [gameErrors, setGameErrors] = useState<IQuestion[]>([])
 
     const nextQuestion = (value: string) => {
 
-        if (value === (!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer)) {
+        let verifyValue = value.trim()
+
+        if (verifyValue === (!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer)) {
             setIsCorrect(true)
             setCorrects(corrects + 1)
         } else {
@@ -60,6 +67,9 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
         if (numberQuestion === questions.length - 1 || numberQuestion === gameErrors.length - 1) {
             setIsPreFinish(true)
         }
+
+        setInput('')
+        setIsHelped(false)
 
     }
 
@@ -95,7 +105,18 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
         navigation.navigate('Home')
     }
 
+    const handleHelp = (help: HelpType) => {
+        setIsHelped(true)
+        setHelpType(help)
+
+        if (help === 'add') {
+            //   rewarded.show()
+            setIsAdd(true)
+        }
+    }
+
     const handleChange = (value: string) => {
+
         if (!/^[a-zA-ZñÑ]+$/.test(value)) {
 
             if (value === "[X]") {
@@ -106,6 +127,8 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
             setInput(input.slice(0, input.length - 1))
             return
         }
+
+        if (input.length >= 28) return
 
         setInput(input + value)
     }
@@ -127,17 +150,26 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
         return () => backHandler.remove()
     }, [])
 
+    useEffect(() => {
+        if (isHelped) {
+            if (helpType === 'add') {
+                changeHelps(2)
+                return
+            }
+
+            changeHelps(-1)
+        }
+    }, [isHelped])
+
     return (
         <View style={generalStyles.containerGeneral}>
             <Question question={!isGameError ? questions[numberQuestion] : gameErrors[numberQuestion]} />
-            <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} showLetters={showLetters} showOptions={showOptions}
-                isCorrect={isCorrect} isIncorrect={isIncorrect} isFinish={isFinish} isPreFinish={isPreFinish}
-            />
+            <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp} />
             {
                 (isCorrect || isIncorrect) ?
                     <Answer answer={isCorrect} correctAnswer={!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer} continueGame={continueGame} />
                     : amountOptions === 'Sin opciones' ?
-                        <Keyboard keyboard={keyboard} handleChange={handleChange} input={input} />
+                        <Keyboard keyboard={keyboard} handleChange={handleChange} input={input} nextQuestion={nextQuestion} />
                         : <Options options={!isGameError ? questions[numberQuestion].options : gameErrors[numberQuestion].options} nextQuestion={nextQuestion} amountOptions={amountOptions} />
             }
             {
@@ -145,7 +177,7 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
             }
             {
                 isFinish && <Finish corrects={corrects} questions={!isGameError ? questions.length : gameErrors.length}
-                    showErrors={showErrors} continueHome={continueHome} isGameError={isGameError} />
+                    showErrors={showErrors} continueHome={continueHome} isGameError={isGameError} handleHelp={handleHelp} isAdd={isAdd} />
             }
         </View>
     )

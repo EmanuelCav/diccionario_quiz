@@ -17,9 +17,6 @@ export const generateGameAction = (allQuestions: IQuestion[], navigation: StackN
         quetionsGame = questions
     }
 
-    console.log(quetionsGame);
-    
-
     for (let i = 0; i < amountQuestions; i++) {
         generateGame(quetionsGame[i])
     }

@@ -26,8 +26,7 @@ export const userStore = create<IUser>()((set) => ({
         isSelect: true,
         questions: 0
     }],
-    showLetters: 5,
-    showOptions: 5,
+    helps: 3,
     changeOptions: (optionsData: IOptions) => set(() => ({
         amountOptions: optionsData.amountOptions,
         amountQuestions: optionsData.amountQuestions
@@ -56,4 +55,7 @@ export const userStore = create<IUser>()((set) => ({
             questions: c.questions
         } : c)
     })),
+    changeHelps: (number: number) => set((state) => ({
+        helps: state.helps + number
+    }))
 }))

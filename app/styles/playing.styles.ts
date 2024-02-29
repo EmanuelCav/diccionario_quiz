@@ -59,7 +59,7 @@ export const playingStyles = StyleSheet.create({
     },
 
     textInputOption: {
-        fontSize: Dimensions.get("window").height / 41,
+        fontSize: Dimensions.get("window").height / 46,
         color: '#f99aaa',
         fontWeight: '600'
     },
@@ -134,7 +134,7 @@ export const playingStyles = StyleSheet.create({
         height: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(93, 193, 185, 0.5)',
+        backgroundColor: 'rgba(249,154,170,0.5)',
     },
 
     containPreFinish: {
@@ -142,7 +142,7 @@ export const playingStyles = StyleSheet.create({
         height: '25%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderColor: '#5dc1b9',
+        borderColor: '#f99aaa',
         backgroundColor: '#ffffff',
         borderStyle: 'solid',
         borderWidth: 3,
@@ -152,7 +152,7 @@ export const playingStyles = StyleSheet.create({
     textPreFinish: {
         fontSize: Dimensions.get("window").height / 41,
         fontWeight: '600',
-        color: '#5dc1b9',
+        color: '#f99aaa',
         textAlign: 'center',
         marginTop: Dimensions.get("window").height / 92
     },
@@ -161,7 +161,7 @@ export const playingStyles = StyleSheet.create({
         width: '95%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        borderColor: '#5dc1b9',
+        borderColor: '#f99aaa',
         backgroundColor: '#ffffff',
         borderStyle: 'solid',
         borderWidth: 3,
@@ -176,7 +176,14 @@ export const playingStyles = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 2,
         width: '100%',
-        marginTop: Dimensions.get("window").height / 92
+        marginTop: Dimensions.get("window").height / 92,
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
     },
 
     textButtonFinish: {
@@ -205,7 +212,7 @@ export const playingStyles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row',
-        width: '45%',
+        width: '60%',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -272,19 +279,20 @@ export const playingStyles = StyleSheet.create({
     },
 
     containerShowInput: {
-        width: '70%',
+        width: '82%',
         padding: Dimensions.get("window").height / 106,
         justifyContent: 'center',
         alignItems: 'center',
         borderBottomColor: '#f99aaa',
         borderBottomWidth: 2,
         borderStyle: 'solid',
-        backgroundColor: '#fbdae0'
+        backgroundColor: '#fbdae0',
+        position: 'relative'
     },
 
     containAcceptInput: {
         padding: Dimensions.get("window").height / 106,
-        width: '20%',
+        width: '12%',
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: "#000",
@@ -298,6 +306,32 @@ export const playingStyles = StyleSheet.create({
         borderColor: '#ffffff',
         borderStyle: 'solid',
         borderWidth: 1,
+    },
+
+    buttonHelpAdd: {
+        padding: Dimensions.get("window").height / 106,
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
+        width: '66.66%',
+        borderColor: '#ffffff',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7,
+        marginTop: Dimensions.get("window").height / 92
+    },
+
+    containIconHelpAdd: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 
 })

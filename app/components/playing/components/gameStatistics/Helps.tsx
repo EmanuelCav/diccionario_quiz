@@ -1,16 +1,25 @@
-import { View } from 'react-native'
+import { Pressable, View, Text, Dimensions } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { playingStyles } from '../../../../styles/playing.styles'
 
-import HelpButton from './components/HelpButton'
-
 import { HelpsPropsType } from '../../../../types/props.types'
 
-const Helps = ({ showLetters, showOptions }: HelpsPropsType) => {
+const Helps = ({ helps, isHelped, handleHelp }: HelpsPropsType) => {
     return (
         <View style={playingStyles.containerHelps}>
-            <HelpButton icon='format-letter-case' text='Letras' amount={showLetters} />
-            <HelpButton icon='clipboard-list' text='Opciones' amount={showOptions} />
+            <Pressable style={({ pressed }) => [
+                {
+                    backgroundColor: pressed ? '#f99aaa' : `${isHelped ? '#dddddd' : '#f1889b'}`
+                },
+                playingStyles.containerHelpButton
+            ]} onPress={() => handleHelp('help')} disabled={isHelped}>
+                <Text style={playingStyles.textGameStatistics}>{helps}</Text>
+                <View style={playingStyles.containIconHelpButton}>
+                    <Icon name='clipboard-list' color='#ffffff' size={Dimensions.get("window").height / 41} />
+                    <Text style={[playingStyles.textGameStatistics, { marginLeft: Dimensions.get("window").width / 120 }]}>Opciones</Text>
+                </View>
+            </Pressable>
         </View>
     )
 }
