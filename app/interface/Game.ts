@@ -1,9 +1,8 @@
-import { StackNavigation } from "../types/props.types";
-import { ICategory } from "./User";
 
 export interface IGame {
     questions: IQuestion[];
     generateGame: (question: IQuestion) => void;
+    emptyQuestions: () => void;
 }
 
 export interface IQuestion {

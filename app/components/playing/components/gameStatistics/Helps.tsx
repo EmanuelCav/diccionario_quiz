@@ -5,7 +5,7 @@ import { playingStyles } from '../../../../styles/playing.styles'
 
 import { HelpsPropsType } from '../../../../types/props.types'
 
-const Helps = ({ helps, isHelped, handleHelp }: HelpsPropsType) => {
+const Helps = ({ helps, isHelped, handleHelp, isOptions }: HelpsPropsType) => {
     return (
         <View style={playingStyles.containerHelps}>
             <Pressable style={({ pressed }) => [
@@ -17,7 +17,11 @@ const Helps = ({ helps, isHelped, handleHelp }: HelpsPropsType) => {
                 <Text style={playingStyles.textGameStatistics}>{helps}</Text>
                 <View style={playingStyles.containIconHelpButton}>
                     <Icon name='clipboard-list' color='#ffffff' size={Dimensions.get("window").height / 41} />
-                    <Text style={[playingStyles.textGameStatistics, { marginLeft: Dimensions.get("window").width / 120 }]}>Opciones</Text>
+                    <Text style={[playingStyles.textGameStatistics, { marginLeft: Dimensions.get("window").width / 120 }]}>
+                        {
+                            isOptions ? 'Filtrar' : 'Opciones'
+                        }
+                    </Text>
                 </View>
             </Pressable>
         </View>

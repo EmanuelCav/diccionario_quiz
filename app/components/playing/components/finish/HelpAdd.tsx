@@ -15,7 +15,7 @@ const HelpAdd = ({ handleHelp }: { handleHelp: (help: HelpType) => void }) => {
         ]} onPress={() => handleHelp('add')}>
             <View style={playingStyles.containIconHelpAdd}>
                 <IconOption name='clipboard-list' color='#ffffff' size={Dimensions.get("window").height / 41} />
-                <Text style={playingStyles.textGameStatistics}>x2</Text>
+                <Text style={playingStyles.textGameStatistics}>x3</Text>
             </View>
             <Icon name='video' color='#ffffff' size={Dimensions.get("window").height / 41} />
         </Pressable>

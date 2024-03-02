@@ -1,5 +1,6 @@
 import { IQuestion } from "../interface/Game";
 import { ICategory } from "../interface/User";
+import { TextOptions } from "../types/key.types";
 
 export const keyboard: string[][] = [['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
 ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'],
@@ -21,17 +22,19 @@ export const generateQuestions = (categories: ICategory[], allQuestions: IQuesti
 
 }
 
-export const generateOptions = (amountQuestions: number, allQuestions: IQuestion[], questions: IQuestion[], amountOptions: string): IQuestion[] => {
+export const generateOptions = (amountQuestions: number, allQuestions: IQuestion[], questions: IQuestion[], amountOptions: TextOptions): IQuestion[] => {
+
+    let isOptions = amountOptions !== 'Sin opciones'
 
     for (let i = 0; i < amountQuestions; i++) {
 
         const options: IQuestion[] = shuffle(allQuestions.filter(q => (q.category === questions[i].category) && (q.answer !== questions[i].answer)))
 
-        const optionRandom = Math.floor(Math.random() * Number(amountOptions))
+        const optionRandom = Math.floor(Math.random() * (isOptions ? Number(amountOptions) : 6))
 
         if (questions[i].options.length > 0) continue
 
-        for (let j = 0; j < Number(amountOptions); j++) {
+        for (let j = 0; j < (isOptions ? Number(amountOptions) : 6); j++) {
 
             if (j === optionRandom) {
                 questions[i].options.push(questions[i].answer)
@@ -43,6 +46,14 @@ export const generateOptions = (amountQuestions: number, allQuestions: IQuestion
     }
 
     return questions
+
+}
+
+export const helpsOptions = (options: string[], question: IQuestion, amountOptions: number): string[] => {
+
+    const optionsFiltered = shuffle(options.filter(o => o !== question.answer)).slice(0, amountOptions / 2)
+
+    return optionsFiltered
 
 }
 

@@ -78,6 +78,7 @@ export type GameStatisticsPropsType = {
     isHelped: boolean;
     helps: number;
     handleHelp: (help: HelpType) => void;
+    isOptions: boolean;
 }
 
 export type AnswerPropsType = {
@@ -109,8 +110,10 @@ export type ActionsFinishPropsType = {
 
 export type SectionOptionsPropsTypes = {
     options: string[]; 
-    amountOptions: TextOptions; 
+    amountOptions: number; 
     nextQuestion: (value: string) => void;
+    optionsHelped: string[];
+    isHelped: boolean;
 }
 
 export type QuestionGameStatisticsPropsType = {
@@ -122,6 +125,7 @@ export type HelpsPropsType = {
     helps: number;
     isHelped: boolean;
     handleHelp: (help: HelpType) => void;
+    isOptions: boolean;
 }
 
 export type KeyboardPropsType = {
@@ -144,4 +148,11 @@ export type InputKeyboardPropsType = {
 export type KeyPropsType = {
     char: string;
     handleChange: (value: string) => void;
+}
+
+export type OptionPropsTypes = {
+    nextQuestion: (value: string) => void;
+    amountOptions: number;
+    option: string;
+    disabled: boolean;
 }

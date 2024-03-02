@@ -7,11 +7,11 @@ import Helps from './components/gameStatistics/Helps'
 
 import { GameStatisticsPropsType } from '../../types/props.types'
 
-const GameStatistics = ({ numberQuestion, questions, helps, isHelped, handleHelp }: GameStatisticsPropsType) => {
+const GameStatistics = ({ numberQuestion, questions, helps, isHelped, handleHelp, isOptions }: GameStatisticsPropsType) => {
     return (
         <View style={playingStyles.containerGameStatistics}>
             <QuestionGameStatistics questions={questions} numberQuestion={numberQuestion} />
-            <Helps isHelped={isHelped} helps={helps} handleHelp={handleHelp} />
+            <Helps isHelped={isHelped} helps={helps} handleHelp={handleHelp} isOptions={isOptions} />
         </View>
     )
 }
