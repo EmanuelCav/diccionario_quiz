@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "client",
-    "slug": "client",
+    "name": "Diccionario Quiz",
+    "slug": "DiccionarioQuiz",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f1889b"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -18,6 +18,8 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.diccionarioquiz.palabrasdeldiccionario",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -26,5 +28,8 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-8789796567862358~9900039111"
   }
 }

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { BackHandler, View } from 'react-native'
-
-import allQuestions from '../../assets/questions.json'
+// import { InterstitialAd, AdEventType, RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
+// import { EXPO_INTERSITICIAL, EXPO_RECOMPENSADO } from '@env';
 
 import { IQuestion } from '../interface/Game'
-import { StackNavigation } from '../types/props.types'
+import { PlayingPropsType } from '../types/props.types'
 import { HelpType } from '../types/key.types'
 
 import Question from '../components/playing/Question'
@@ -20,9 +20,21 @@ import { generalStyles } from '../styles/general.styles'
 import { userStore } from '../server/user/store'
 import { gameStore } from '../server/question/store'
 
-import { emptyOptions, helpsOptions, keyboard } from '../helper/game'
+import { emptyOptions, helpsOptions, keyboard, verifyValue } from '../helper/game'
 
-const Playing = ({ navigation }: { navigation: StackNavigation }) => {
+// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : `${EXPO_INTERSITICIAL}`;
+
+// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+//     keywords: ['fashion', 'clothing'],
+// });
+
+// const adUnitIdReward = __DEV__ ? TestIds.REWARDED : `${EXPO_RECOMPENSADO}`;
+
+// const rewarded = RewardedAd.createForAdRequest(adUnitIdReward, {
+//     keywords: ['fashion', 'clothing'],
+// });
+
+const Playing = ({ navigation, route }: PlayingPropsType) => {
 
     const { amountOptions, correctQuestion, countQuestion, helps, changeHelps } = userStore()
     const { questions, emptyQuestions } = gameStore()
@@ -49,9 +61,9 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
 
     const nextQuestion = (value: string) => {
 
-        let verifyValue = value.trim()
+        let valueAnswer = verifyValue(value, !isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer)
 
-        if (verifyValue === (!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer)) {
+        if (valueAnswer === (!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer)) {
             setIsCorrect(true)
             setCorrects(corrects + 1)
         } else {
@@ -101,7 +113,7 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
     }
 
     const continueHome = () => {
-        const optionsAllQuestions = allQuestions.filter((aq) => aq.options.length > 0)
+        const optionsAllQuestions = route.params.allQuestions.filter((aq) => aq.options.length > 0)
         emptyOptions(optionsAllQuestions)
         emptyQuestions()
         // interstitial.show()
@@ -113,7 +125,7 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
         setHelpType(help)
 
         if (help === 'add') {
-            //   rewarded.show()
+            // rewarded.show()
             setIsAdd(true)
         }
     }
@@ -135,6 +147,35 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
 
         setInput(input + value)
     }
+
+    // useEffect(() => {
+    //     const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+    //         console.log("Loading add");
+    //     });
+
+    //     interstitial.load();
+
+    //     return unsubscribe;
+    // }, []);
+
+    // useEffect(() => {
+    //     const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+    //         console.log("Loading add");
+    //     });
+    //     const unsubscribeEarned = rewarded.addAdEventListener(
+    //         RewardedAdEventType.EARNED_REWARD,
+    //         reward => {
+    //             console.log('User earned reward of ', reward);
+    //         },
+    //     );
+
+    //     rewarded.load();
+
+    //     return () => {
+    //         unsubscribeLoaded();
+    //         unsubscribeEarned();
+    //     };
+    // }, []);
 
     useEffect(() => {
         if (!isGameError) {
@@ -171,8 +212,8 @@ const Playing = ({ navigation }: { navigation: StackNavigation }) => {
     return (
         <View style={generalStyles.containerGeneral}>
             <Question question={!isGameError ? questions[numberQuestion] : gameErrors[numberQuestion]} />
-            <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp} 
-            isOptions={amountOptions !== 'Sin opciones'} />
+            <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp}
+                isOptions={amountOptions !== 'Sin opciones'} />
             {
                 (isCorrect || isIncorrect) ?
                     <Answer answer={isCorrect} correctAnswer={!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer} continueGame={continueGame} />

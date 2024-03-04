@@ -1,4 +1,8 @@
 import { View } from 'react-native'
+import { useEffect } from 'react'
+
+import { collection, onSnapshot } from 'firebase/firestore'
+import { firestore } from '../../firebase.config'
 
 import { generalStyles } from '../styles/general.styles'
 
@@ -17,7 +21,7 @@ const Home = ({ navigation }: { navigation: StackNavigation }) => {
 
   return (
     <View style={generalStyles.containerGeneral}>
-      <Banner />
+      {/* <Banner /> */}
       <Menu navigation={navigation} categories={categories} generateGame={generateGame} amountQuestions={amountQuestions} amountOptions={amountOptions} />
     </View>
   )

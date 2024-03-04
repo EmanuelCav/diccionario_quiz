@@ -49,6 +49,31 @@ export const generateOptions = (amountQuestions: number, allQuestions: IQuestion
 
 }
 
+export const verifyValue = (value: string, answer: string): string => {
+
+    let mainValue = value.trim()
+
+    if (mainValue === answer) return mainValue
+
+    if (mainValue.length >= 4) {
+
+        let count = 0
+
+        for (let i = 0; i < answer.length; i++) {
+            if(answer[i] === mainValue[i]) {
+                count++
+            }
+        }
+
+        if(count >= (answer.length - Math.floor(answer.length / 4))) {
+            return answer
+        }
+    }
+
+    return mainValue
+
+}
+
 export const helpsOptions = (options: string[], question: IQuestion, amountOptions: number): string[] => {
 
     const optionsFiltered = shuffle(options.filter(o => o !== question.answer)).slice(0, amountOptions / 2)

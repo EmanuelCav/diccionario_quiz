@@ -8,7 +8,9 @@ import { IQuestion } from "../interface/Game";
 
 type Routes = {
     Home: undefined;
-    Playing: undefined;
+    Playing: {
+        allQuestions: IQuestion[];
+    };
     Options: undefined;
     Categories: {
         isCategory: boolean;
@@ -19,6 +21,12 @@ type Routes = {
 export type StackNavigation = NativeStackNavigationProp<Routes>;
 
 export type CategoriesRouteType = RouteProp<Routes, 'Categories'>
+export type PlayingRouteType = RouteProp<Routes, 'Playing'>
+
+export type PlayingPropsType = {
+    navigation: StackNavigation;
+    route: PlayingRouteType
+}
 
 export type ButtonMenuPropsType = {
     text: string;

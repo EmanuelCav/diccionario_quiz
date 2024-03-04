@@ -4,7 +4,9 @@ export const generalStyles = StyleSheet.create({
 
     containerBanner: {
         height: '20%',
-        width: '100%'
+        width: '100%',
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     },
 
     containerGeneral: {

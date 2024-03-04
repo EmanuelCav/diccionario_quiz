@@ -1,6 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
-  }
+    "strict": true,
+    "outDir": "build",
+    "jsx": "react-jsx",
+    "typeRoots": ["/types"]
+  },
+  "exclude": ["node_modules"],
+  "include": ["app", "firebase.config.ts"],
+  "files": ["types/env.d.ts"]
 }

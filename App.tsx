@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from "react-native";
@@ -30,13 +32,13 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} options={{
             animation: 'flip'
           }} />
-          <Stack.Screen name="Playing" component={Playing} options={{
+          <Stack.Screen name="Playing" component={Playing as any} options={{
             animation: 'flip'
           }} />
           <Stack.Screen name="Options" component={Options} options={{
             animation: 'flip'
           }} />
-          <Stack.Screen name="Categories" component={Categories} options={{
+          <Stack.Screen name="Categories" component={Categories as any} options={{
             animation: 'flip'
           }} />
           <Stack.Screen name="Statistics" component={Statistics} options={{

@@ -15,6 +15,8 @@ export const generateGameAction = (allQuestions: IQuestion[], navigation: StackN
         generateGame(quetionsGame[i])
     }
 
-    navigation.navigate("Playing")
+    navigation.navigate("Playing", {
+        allQuestions
+    })
 
 }

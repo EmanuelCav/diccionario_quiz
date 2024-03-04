@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 
 export default function Container({ children }: { children: ReactNode }) {

@@ -36,11 +36,13 @@
     },
     {
         "text": "Representar las palabras o las ideas con letras u otros signos trazados en papel u otra superficie",
-        "category": "Verbos",
+        "category": "Verbos", 
         "answer": "ESCRIBIR",
         "options": [],
         "isAnswer": true
     },
+    "Sustantivos",
+    "Adjetivos",
     {
         "text": "Dicho de una persona o de un animal: Trasladarse en el agua, ayudándose de los movimientos necesarios, y sin tocar el suelo ni otro apoyo",
         "category": "Verbos",
