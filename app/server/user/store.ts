@@ -57,5 +57,11 @@ export const userStore = create<IUser>()((set) => ({
     })),
     changeHelps: (number: number) => set((state) => ({
         helps: state.helps + number
+    })),
+    userStorage: (storage: any) => set(() => ({
+        amountOptions: storage.amountOptions,
+        helps: storage.helps,
+        categories: storage.categories,
+        amountQuestions: storage.amountQuestions,
     }))
 }))

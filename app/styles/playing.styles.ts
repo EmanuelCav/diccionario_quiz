@@ -219,7 +219,6 @@ export const playingStyles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row',
-        width: '60%',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

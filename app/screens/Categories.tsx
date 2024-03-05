@@ -22,7 +22,7 @@ const Categories = ({ navigation, route }: CategoriesPropsType) => {
     return (
         <View style={generalStyles.containerGeneral}>
             <TitleCategories />
-            <ShowCategories categories={categories} changeCategoryAction={changeCategoryAction} changeCategory={changeCategory} />
+            <ShowCategories categories={categories} changeCategoryAction={changeCategoryAction} changeCategory={changeCategory!} />
             <ButtonAccept text={route.params.isCategory ? 'ACEPTAR' : 'INICIAR'} func={goBack} disabled={!route.params.isCategory && categories.filter(c => c.isSelect).length === 0} />
         </View>
     )

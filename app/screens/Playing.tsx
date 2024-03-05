@@ -21,6 +21,7 @@ import { userStore } from '../server/user/store'
 import { gameStore } from '../server/question/store'
 
 import { emptyOptions, helpsOptions, keyboard, verifyValue } from '../helper/game'
+import { setStorage } from '../helper/storage'
 
 // const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : `${EXPO_INTERSITICIAL}`;
 
@@ -36,7 +37,7 @@ import { emptyOptions, helpsOptions, keyboard, verifyValue } from '../helper/gam
 
 const Playing = ({ navigation, route }: PlayingPropsType) => {
 
-    const { amountOptions, correctQuestion, countQuestion, helps, changeHelps } = userStore()
+    const { amountOptions, amountQuestions, categories, correctQuestion, countQuestion, helps, changeHelps } = userStore()
     const { questions, emptyQuestions } = gameStore()
 
     const [input, setInput] = useState<string>('')
@@ -120,6 +121,24 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         navigation.navigate('Home')
     }
 
+    const handleQuit = () => {
+        setInput('')
+        setIsHelped(false)
+
+        if (!isGameError) {
+            setErrors([...errors, questions[numberQuestion]])
+        } else {
+            setErrors([...errors, gameErrors[numberQuestion]])
+        }
+
+        if (numberQuestion === questions.length - 1 || numberQuestion === gameErrors.length - 1) {
+            setIsPreFinish(true)
+            return
+        }
+
+        setNumberQuestion(numberQuestion + 1)
+    }
+
     const handleHelp = (help: HelpType) => {
         setIsHelped(true)
         setHelpType(help)
@@ -178,8 +197,16 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     // }, []);
 
     useEffect(() => {
+
+        setStorage({
+            amountOptions,
+            amountQuestions,
+            categories,
+            helps
+        })
+
         if (!isGameError) {
-            countQuestion(questions[numberQuestion].category)
+            countQuestion!(questions[numberQuestion].category)
             setOptionsHelped(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], Number(amountOptions)))
             return
         }
@@ -189,7 +216,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
 
     useEffect(() => {
         if (isCorrect && !isGameError) {
-            correctQuestion(questions[numberQuestion].category)
+            correctQuestion!(questions[numberQuestion].category)
         }
     }, [corrects])
 
@@ -201,11 +228,11 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     useEffect(() => {
         if (isHelped) {
             if (helpType === 'add') {
-                changeHelps(3)
+                changeHelps!(3)
                 return
             }
 
-            changeHelps(-1)
+            changeHelps!(-1)
         }
     }, [isHelped])
 
@@ -213,7 +240,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         <View style={generalStyles.containerGeneral}>
             <Question question={!isGameError ? questions[numberQuestion] : gameErrors[numberQuestion]} />
             <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp}
-                isOptions={amountOptions !== 'Sin opciones'} />
+                isOptions={amountOptions !== 'Sin opciones'} handleQuit={handleQuit} />
             {
                 (isCorrect || isIncorrect) ?
                     <Answer answer={isCorrect} correctAnswer={!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer} continueGame={continueGame} />

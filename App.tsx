@@ -11,6 +11,8 @@ import Options from "./app/screens/Options";
 import Playing from "./app/screens/Playing";
 import Statistics from "./app/screens/Statistics";
 
+import Loading from './app/components/response/Loading'
+
 const Stack = createNativeStackNavigator();
 
 const MyTheme = {
@@ -24,6 +26,7 @@ const MyTheme = {
 export default function App() {
   return (
     <Container>
+      <Loading />
       <NavigationContainer theme={MyTheme}>
         <StatusBar backgroundColor={'#ff00ff'} />
         <Stack.Navigator initialRouteName="Home" screenOptions={{

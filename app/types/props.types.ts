@@ -50,6 +50,7 @@ export type MenuPropsType = {
     generateGame: (question: IQuestion) => void; 
     amountQuestions: number; 
     amountOptions: TextOptions;
+    changeLoading: (response: boolean) => void;
 }
 
 export type AmountQuestionsPropsType = {
@@ -87,6 +88,7 @@ export type GameStatisticsPropsType = {
     helps: number;
     handleHelp: (help: HelpType) => void;
     isOptions: boolean;
+    handleQuit: () => void;
 }
 
 export type AnswerPropsType = {
@@ -134,6 +136,7 @@ export type HelpsPropsType = {
     isHelped: boolean;
     handleHelp: (help: HelpType) => void;
     isOptions: boolean;
+    handleQuit: () => void;
 }
 
 export type KeyboardPropsType = {

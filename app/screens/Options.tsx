@@ -13,9 +13,11 @@ import { generalStyles } from '../styles/general.styles'
 import { userStore } from '../server/user/store'
 import { changeOptionsAction } from "../server/actions/user.actions";
 
+import { setStorage } from "../helper/storage";
+
 const Options = ({ navigation }: { navigation: StackNavigation }) => {
 
-    const { amountOptions, amountQuestions, changeOptions } = userStore()
+    const { amountOptions, amountQuestions, helps, categories, changeOptions } = userStore()
 
     const initialState = {
         amountOptions,
@@ -25,7 +27,14 @@ const Options = ({ navigation }: { navigation: StackNavigation }) => {
     const [optionsData, setOptionsData] = useState<IOptions>(initialState)
 
     const goBack = () => {
-        changeOptionsAction(optionsData, changeOptions, navigation)
+        setStorage({
+            amountOptions: optionsData.amountOptions,
+            amountQuestions: optionsData.amountQuestions,
+            categories,
+            helps
+        })
+
+        changeOptionsAction(optionsData, changeOptions!, navigation)
     }
 
     return (

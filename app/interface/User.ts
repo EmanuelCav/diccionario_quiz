@@ -5,11 +5,12 @@ export interface IUser {
     amountQuestions: number;
     categories: ICategory[];
     helps: number;
-    changeOptions: (optionsData: IOptions) => void;
-    changeCategory: (category: ICategory) => void;
-    countQuestion: (category: string) => void;
-    correctQuestion: (category: string) => void;
-    changeHelps: (number: number) => void;
+    changeOptions?: (optionsData: IOptions) => void;
+    changeCategory?: (category: ICategory) => void;
+    countQuestion?: (category: string) => void;
+    correctQuestion?: (category: string) => void;
+    changeHelps?: (number: number) => void;
+    userStorage?: (storage: any) => void;
 }
 
 export interface ICategory {

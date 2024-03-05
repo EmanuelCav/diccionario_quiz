@@ -12,3 +12,8 @@ export interface IQuestion {
     answer: string;
     isAnswer: boolean;
 }
+
+export interface IResponse {
+    loading: boolean;
+    changeLoading: (response: boolean) => void;
+}

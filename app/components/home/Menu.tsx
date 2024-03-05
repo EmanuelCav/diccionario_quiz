@@ -10,10 +10,11 @@ import { MenuPropsType } from '../../types/props.types'
 import { IQuestion } from '../../interface/Game'
 
 import { generateGameAction } from '../../server/actions/game.actions'
+
 import { firestore } from '../../../firebase.config'
 import { collection, onSnapshot } from 'firebase/firestore'
 
-const Menu = ({ navigation, categories, amountOptions, amountQuestions, generateGame }: MenuPropsType) => {
+const Menu = ({ navigation, categories, amountOptions, amountQuestions, generateGame, changeLoading }: MenuPropsType) => {
 
     const [questions, setQuestions] = useState<IQuestion[]>([])
 
@@ -58,9 +59,14 @@ const Menu = ({ navigation, categories, amountOptions, amountQuestions, generate
 
         setQuestions(questionsData)
 
+        setTimeout(() => {
+            changeLoading(false)
+        }, 1850);
+
         return () => {
             suscriber()
         }
+    
     }, [])
 
     return (

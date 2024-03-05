@@ -9,6 +9,25 @@ export const homeStyles = StyleSheet.create({
         alignItems: 'center'
     },
 
+    containerTitleHome: {
+        width: '100%',
+        height: '30%',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+
+    imageBackground: {
+        width: Dimensions.get("window").height / 8,
+        height: Dimensions.get("window").height / 8,
+    },
+
+    textTitleHome: {
+        fontSize: Dimensions.get("window").height / 29,
+        fontWeight: '600',
+        color: '#ffffff'
+    },
+
     buttonMenu: {
         padding: Dimensions.get("window").height / 74,
         borderRadius: 8,
