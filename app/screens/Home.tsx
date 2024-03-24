@@ -27,9 +27,6 @@ const Home = ({ navigation }: { navigation: StackNavigation }) => {
 
       const storage = await getStorage()
 
-      console.log(storage);
-      
-
       if (storage) {
         userStorage!(JSON.parse(storage) as any)
       }

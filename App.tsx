@@ -28,7 +28,7 @@ export default function App() {
     <Container>
       <Loading />
       <NavigationContainer theme={MyTheme}>
-        <StatusBar backgroundColor={'#ff00ff'} />
+        <StatusBar backgroundColor={'#f1889b'} />
         <Stack.Navigator initialRouteName="Home" screenOptions={{
           headerShown: false
         }}>

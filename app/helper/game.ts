@@ -4,7 +4,7 @@ import { TextOptions } from "../types/key.types";
 
 export const keyboard: string[][] = [['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
 ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'],
-['Z', 'X', 'C', 'V', 'B', 'N', 'M', '←', '[X]']]
+['Z', 'X', 'C', 'V', 'B', 'N', 'M', '←', 'X!']]
 
 export const generateQuestions = (categories: ICategory[], allQuestions: IQuestion[], amountQuestions: number): IQuestion[] => {
 
