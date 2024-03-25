@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { BackHandler, View } from 'react-native'
-// import { InterstitialAd, AdEventType, RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
-// import { EXPO_INTERSITICIAL, EXPO_RECOMPENSADO } from '@env';
+import { InterstitialAd, AdEventType, RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
+import { EXPO_INTERSITICIAL, EXPO_RECOMPENSADO } from '@env';
 
 import { IQuestion } from '../interface/Game'
 import { PlayingPropsType } from '../types/props.types'
@@ -23,17 +23,17 @@ import { gameStore } from '../server/question/store'
 import { emptyOptions, helpsOptions, keyboard, verifyValue } from '../helper/game'
 import { setStorage } from '../helper/storage'
 
-// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : `${EXPO_INTERSITICIAL}`;
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : `${EXPO_INTERSITICIAL}`;
 
-// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-//     keywords: ['fashion', 'clothing'],
-// });
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+    keywords: ['fashion', 'clothing'],
+});
 
-// const adUnitIdReward = __DEV__ ? TestIds.REWARDED : `${EXPO_RECOMPENSADO}`;
+const adUnitIdReward = __DEV__ ? TestIds.REWARDED : `${EXPO_RECOMPENSADO}`;
 
-// const rewarded = RewardedAd.createForAdRequest(adUnitIdReward, {
-//     keywords: ['fashion', 'clothing'],
-// });
+const rewarded = RewardedAd.createForAdRequest(adUnitIdReward, {
+    keywords: ['fashion', 'clothing'],
+});
 
 const Playing = ({ navigation, route }: PlayingPropsType) => {
 
@@ -117,7 +117,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         const optionsAllQuestions = route.params.allQuestions.filter((aq) => aq.options.length > 0)
         emptyOptions(optionsAllQuestions)
         emptyQuestions()
-        // interstitial.show()
+        interstitial.show()
         navigation.navigate('Home')
     }
 
@@ -144,7 +144,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         setHelpType(help)
 
         if (help === 'add') {
-            // rewarded.show()
+            rewarded.show()
             setIsAdd(true)
         }
     }
@@ -167,34 +167,34 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         setInput(input + value)
     }
 
-    // useEffect(() => {
-    //     const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-    //         console.log("Loading add");
-    //     });
+    useEffect(() => {
+        const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+            console.log("Loading add");
+        });
 
-    //     interstitial.load();
+        interstitial.load();
 
-    //     return unsubscribe;
-    // }, []);
+        return unsubscribe;
+    }, []);
 
-    // useEffect(() => {
-    //     const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-    //         console.log("Loading add");
-    //     });
-    //     const unsubscribeEarned = rewarded.addAdEventListener(
-    //         RewardedAdEventType.EARNED_REWARD,
-    //         reward => {
-    //             console.log('User earned reward of ', reward);
-    //         },
-    //     );
+    useEffect(() => {
+        const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+            console.log("Loading add");
+        });
+        const unsubscribeEarned = rewarded.addAdEventListener(
+            RewardedAdEventType.EARNED_REWARD,
+            reward => {
+                console.log('User earned reward of ', reward);
+            },
+        );
 
-    //     rewarded.load();
+        rewarded.load();
 
-    //     return () => {
-    //         unsubscribeLoaded();
-    //         unsubscribeEarned();
-    //     };
-    // }, []);
+        return () => {
+            unsubscribeLoaded();
+            unsubscribeEarned();
+        };
+    }, []);
 
     useEffect(() => {
 
