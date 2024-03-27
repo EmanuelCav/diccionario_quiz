@@ -3,17 +3,17 @@ import { Dimensions, StyleSheet } from "react-native";
 export const statisticsStyles = StyleSheet.create({
 
     containerHeaderStatistics: {
-        height: '12%',
+        height: '16%',
         width: '100%',
-        padding: Dimensions.get("window").height / 106,
+        paddingHorizontal: Dimensions.get("window").width / 51.42,
+        justifyContent: 'center',
+        alignItems: 'flex-start'
     },
 
     containerCategoryStatistics: {
         flex: 1,
         width: '100%',
-        borderWidth: 2,
-        borderStyle: 'solid',
-        borderColor: '#f1889b'
+        paddingVertical: Dimensions.get("window").height / 106
     },
 
     containerCategoryStatistic: {

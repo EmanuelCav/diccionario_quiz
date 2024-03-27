@@ -3,7 +3,7 @@ import { Dimensions, StyleSheet } from "react-native";
 export const generalStyles = StyleSheet.create({
 
     containerBanner: {
-        height: '20%',
+        height: '12%',
         width: '100%',
         justifyContent: 'flex-end',
         alignItems: 'center'

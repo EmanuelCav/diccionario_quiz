@@ -11,7 +11,7 @@ export const homeStyles = StyleSheet.create({
 
     containerTitleHome: {
         width: '100%',
-        height: '30%',
+        height: '25%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'row'
