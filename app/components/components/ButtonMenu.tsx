@@ -1,8 +1,8 @@
 import { Text, Pressable } from 'react-native'
 
-import { homeStyles } from '../../../styles/home.styles'
+import { homeStyles } from '../../styles/home.styles'
 
-import { ButtonMenuPropsType } from '../../../types/props.types'
+import { ButtonMenuPropsType } from '../../types/props.types'
 
 const ButtonMenu = ({ text, func }: ButtonMenuPropsType) => {
     return (

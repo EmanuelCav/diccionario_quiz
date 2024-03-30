@@ -10,15 +10,13 @@ import TitleHome from '../components/home/TitleHome'
 import { StackNavigation } from '../types/props.types'
 
 import { userStore } from '../server/user/store'
-import { gameStore } from '../server/question/store'
-import { responseStore } from '../server/response/store'
 
 import { getStorage } from '../helper/storage'
+import { responseStore } from '../server/response/store'
 
 const Home = ({ navigation }: { navigation: StackNavigation }) => {
 
-  const { categories, amountQuestions, amountOptions, userStorage } = userStore()
-  const { generateGame } = gameStore()
+  const { userStorage } = userStore()
   const { changeLoading } = responseStore()
 
   useEffect(() => {
@@ -36,9 +34,9 @@ const Home = ({ navigation }: { navigation: StackNavigation }) => {
 
   return (
     <View style={generalStyles.containerGeneral}>
-      <Banner />
+      {/* <Banner /> */}
       <TitleHome />
-      <Menu navigation={navigation} categories={categories} generateGame={generateGame} amountQuestions={amountQuestions} amountOptions={amountOptions} changeLoading={changeLoading} />
+      <Menu navigation={navigation} changeLoading={changeLoading} />
     </View>
   )
 }

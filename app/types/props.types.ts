@@ -16,6 +16,7 @@ type Routes = {
         isCategory: boolean;
     };
     Statistics: undefined;
+    Play: undefined;
 }
 
 export type StackNavigation = NativeStackNavigationProp<Routes>;
@@ -44,12 +45,17 @@ export type CategoriesPropsType = {
     route: CategoriesRouteType;
 }
 
-export type MenuPropsType = {
+export type MenuPlayPropsType = {
     navigation: StackNavigation;
     categories: ICategory[];
     generateGame: (question: IQuestion) => void; 
     amountQuestions: number; 
     amountOptions: TextOptions;
+    changeLoading: (response: boolean) => void;
+}
+
+export type MenuPropsType = {
+    navigation: StackNavigation;
     changeLoading: (response: boolean) => void;
 }
 
