@@ -1,4 +1,6 @@
 import { IQuestion } from "../interface/Game";
+import { ICategory } from "../interface/User";
+import { TextOptions } from "../types/key.types";
 
 export const keyboard: string[][] = [['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
 ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'],
@@ -44,12 +46,12 @@ export const verifyValue = (value: string, answer: string): string => {
         let count = 0
 
         for (let i = 0; i < answer.length; i++) {
-            if (answer[i] === mainValue[i]) {
+            if(answer[i] === mainValue[i]) {
                 count++
             }
         }
 
-        if (count >= (answer.length - Math.floor(answer.length / 4))) {
+        if(count >= (answer.length - Math.floor(answer.length / 4))) {
             return answer
         }
     }

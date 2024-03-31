@@ -13,12 +13,6 @@ const Menu = ({ navigation, changeLoading }: MenuPropsType) => {
         navigation.navigate('Play')
     }
 
-    const redirectCategories = () => {
-        navigation.navigate('Categories', {
-            isCategory: true
-        })
-    }
-
     const redirectOptions = () => {
         navigation.navigate('Options')
     }
@@ -30,8 +24,7 @@ const Menu = ({ navigation, changeLoading }: MenuPropsType) => {
     return (
         <View style={homeStyles.containerMenu}>
             <ButtonMenu text='INICIAR' func={redirectPlay} />
-            <ButtonMenu text='CATEGORÍAS' func={redirectCategories} />
-            {/* <ButtonMenu text='OPCIONES' func={redirectOptions} /> */}
+            <ButtonMenu text='OPCIONES' func={redirectOptions} />
             <ButtonMenu text='ESTADÍSTICAS' func={redirectStatistics} />
         </View>
     )

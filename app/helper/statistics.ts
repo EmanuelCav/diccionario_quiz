@@ -1,24 +1,16 @@
-import { ICategory } from "../interface/User";
+import { IUser } from "../interface/User";
 
-export const totalQuestions = (categories: ICategory[]): number => {
+export const totalQuestions = (user: IUser): number => {
 
-    let total = 0
-
-    for (let i = 0; i < categories.length; i++) {
-        total+=categories[i].questions
-    }
+    let total = user.definitions.amount + user.synonyms.amount + user.antonyms.amount
 
     return total
 
 }
 
-export const totalCorrects = (categories: ICategory[]): number => {
+export const totalCorrects = (user: IUser): number => {
 
-    let total = 0
-
-    for (let i = 0; i < categories.length; i++) {
-        total+=categories[i].corrects
-    }
+    let total = user.definitions.corrects + user.synonyms.corrects + user.antonyms.corrects
 
     return total
 

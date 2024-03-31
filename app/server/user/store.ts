@@ -1,41 +1,83 @@
 import { create } from 'zustand'
 
-import { ICategory, IUser } from '../../interface/User'
+import { IOptions, IUser } from '../../interface/User'
 
 export const userStore = create<IUser>()((set) => ({
+    sounds: true,
+    definitions: {
+        name: 'definitions',
+        amount: 0,
+        corrects: 0
+    },
+    antonyms: {
+        name: 'antonyms',
+        amount: 0,
+        corrects: 0
+    },
+    synonyms: {
+        name: 'synonyms',
+        amount: 0,
+        corrects: 0
+    },
     amountQuestions: 5,
-    categories: [{
-        category: "Sustantivos"
-    }, {
-        category: "Adjetivos"
-    }, {
-        category: "Verbos"
-    }, {
-        category: "Preposiciones"
-    }],
     helps: 5,
-    changeCategory: (category: ICategory) => set((state) => ({
-        categories: state.categories.map((c) => category.category === c.category ? {
-            category: category.category
-        } : c)
+    countDefinitions: () => set((state) => ({
+        definitions: {
+            name: state.definitions.name,
+            corrects: state.definitions.corrects,
+            amount: state.definitions.amount + 1
+        }
     })),
-    countQuestion: (category: string) => set((state) => ({
-        categories: state.categories.map((c) => category === c.category ? {
-            category: c.category
-        } : c)
+    correctDefinitions: () => set((state) => ({
+        definitions: {
+            name: state.definitions.name,
+            corrects: state.definitions.corrects + 1,
+            amount: state.definitions.amount
+        }
     })),
-    correctQuestion: (category: string) => set((state) => ({
-        categories: state.categories.map((c) => category === c.category ? {
-            category: c.category,
-        } : c)
+    countSynonyms: () => set((state) => ({
+        synonyms: {
+            name: state.synonyms.name,
+            corrects: state.synonyms.corrects,
+            amount: state.synonyms.amount + 1
+        }
+    })),
+    correctSynonyms: () => set((state) => ({
+        synonyms: {
+            name: state.synonyms.name,
+            corrects: state.synonyms.corrects + 1,
+            amount: state.synonyms.amount
+        }
+    })),
+    countAntonyms: () => set((state) => ({
+        antonyms: {
+            name: state.antonyms.name,
+            corrects: state.antonyms.corrects,
+            amount: state.antonyms.amount + 1
+        }
+    })),
+    correctAntonyms: () => set((state) => ({
+        antonyms: {
+            name: state.antonyms.name,
+            corrects: state.antonyms.corrects + 1,
+            amount: state.antonyms.amount
+        }
+    })),
+    changeOptions: (optionsData: IOptions) => set((state) => ({
+        amountQuestions: optionsData.amountQuestions
     })),
     changeHelps: (number: number) => set((state) => ({
         helps: state.helps + number
     })),
+    changeSounds: () => set((state) => ({
+        sounds: !state.sounds
+    })),
     userStorage: (storage: any) => set(() => ({
-        amountOptions: storage.amountOptions,
+        antonyms: storage.antonyms,
+        synonyms: storage.synonyms,
+        definitions: storage.definitions,
+        sounds: storage.sounds,
         helps: storage.helps,
-        categories: storage.categories,
         amountQuestions: storage.amountQuestions,
     }))
 }))

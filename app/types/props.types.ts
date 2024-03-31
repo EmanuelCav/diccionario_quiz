@@ -2,8 +2,8 @@ import { SetStateAction } from "react";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RouteProp } from "@react-navigation/native";
 
-import { ICategory, IOptions } from '../interface/User';
-import { HelpType, TextOptions } from "./key.types";
+import { ICategory, IOptions, IStatistic } from '../interface/User';
+import { GameType, HelpType, TextOptions } from "./key.types";
 import { IQuestion } from "../interface/Game";
 
 type Routes = {
@@ -11,18 +11,15 @@ type Routes = {
     Playing: {
         allQuestions: IQuestion[];
         option: TextOptions;
+        game: GameType;
     };
     Options: undefined;
-    Categories: {
-        isCategory: boolean;
-    };
     Statistics: undefined;
     Play: undefined;
 }
 
 export type StackNavigation = NativeStackNavigationProp<Routes>;
 
-export type CategoriesRouteType = RouteProp<Routes, 'Categories'>
 export type PlayingRouteType = RouteProp<Routes, 'Playing'>
 
 export type PlayingPropsType = {
@@ -37,18 +34,15 @@ export type ButtonMenuPropsType = {
 
 export type ButtonMenuPlayPropsType = {
     text: string;
-    func: (option: TextOptions) => void;
+    func: (option: TextOptions, gameQuestions: IQuestion[], game: GameType) => void;
     option: TextOptions;
+    gameQuestions: IQuestion[];
+    game: GameType;
 }
 
 export type ButtonAcceptPropsType = {
     text: string;
     func: () => void;
-}
-
-export type CategoriesPropsType = {
-    navigation: StackNavigation;
-    route: CategoriesRouteType;
 }
 
 export type MenuPlayPropsType = {
@@ -99,6 +93,11 @@ export type GameStatisticsPropsType = {
     handleHelp: (help: HelpType) => void;
     isOptions: boolean;
     handleQuit: () => void;
+}
+
+export type CategoryStatisticPropsType = {
+    text: string;
+    statistic: IStatistic;
 }
 
 export type AnswerPropsType = {
@@ -176,4 +175,9 @@ export type OptionPropsTypes = {
     amountOptions: number;
     option: string;
     disabled: boolean;
+}
+
+export type SoundsPropsType = {
+    sounds: boolean;
+    changeSounds: () => void;
 }

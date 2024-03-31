@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 
 export const playStyles = StyleSheet.create({
 
@@ -8,6 +8,13 @@ export const playStyles = StyleSheet.create({
         justifyContent: 'space-evenly',
         alignItems: 'center',
         flexDirection: 'column'
+    },
+
+    playTitle: {
+        fontSize: Dimensions.get("window").height / 41,
+        fontWeight: '600',
+        color: '#ffffff',
+        textAlign: 'center'
     }
 
 })

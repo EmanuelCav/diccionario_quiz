@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BackHandler, View } from 'react-native'
 import { InterstitialAd, AdEventType, RewardedAd, RewardedAdEventType, TestIds } from 'react-native-google-mobile-ads';
 import { EXPO_INTERSITICIAL, EXPO_RECOMPENSADO } from '@env';
+import { AVPlaybackSource, Audio } from 'expo-av';
 
 import { IQuestion } from '../interface/Game'
 import { PlayingPropsType } from '../types/props.types'
@@ -23,21 +24,21 @@ import { gameStore } from '../server/question/store'
 import { emptyOptions, helpsOptions, keyboard, verifyValue } from '../helper/game'
 import { setStorage } from '../helper/storage'
 
-// const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : `${EXPO_INTERSITICIAL}`;
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : `${EXPO_INTERSITICIAL}`;
 
-// const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-//     keywords: ['fashion', 'clothing'],
-// });
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+    keywords: ['fashion', 'clothing'],
+});
 
-// const adUnitIdReward = __DEV__ ? TestIds.REWARDED : `${EXPO_RECOMPENSADO}`;
+const adUnitIdReward = __DEV__ ? TestIds.REWARDED : `${EXPO_RECOMPENSADO}`;
 
-// const rewarded = RewardedAd.createForAdRequest(adUnitIdReward, {
-//     keywords: ['fashion', 'clothing'],
-// });
+const rewarded = RewardedAd.createForAdRequest(adUnitIdReward, {
+    keywords: ['fashion', 'clothing'],
+});
 
 const Playing = ({ navigation, route }: PlayingPropsType) => {
 
-    const { amountQuestions, categories, correctQuestion, countQuestion, helps, changeHelps } = userStore()
+    const { antonyms, definitions, synonyms, amountQuestions, correctDefinitions, countDefinitions, countAntonyms, correctAntonyms, countSynonyms, correctSynonyms, helps, changeHelps, sounds } = userStore()
     const { questions, emptyQuestions } = gameStore()
 
     const [input, setInput] = useState<string>('')
@@ -59,6 +60,18 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     const [gameErrors, setGameErrors] = useState<IQuestion[]>([])
 
     const [optionsHelped, setOptionsHelped] = useState<string[]>(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], 6))
+
+    const [listen, setListen] = useState<Audio.Sound>()
+
+    const playAudio = async (root: AVPlaybackSource) => {
+
+        const { sound } = await Audio.Sound.createAsync(root)
+
+        setListen(sound)
+
+        await sound.playAsync()
+
+    }
 
     const nextQuestion = (value: string) => {
 
@@ -114,10 +127,13 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     }
 
     const continueHome = () => {
+        // for (let i = 0; i < route.params.allQuestions.length; i++) {
+        //     console.log(route.params.allQuestions[i]);
+        // }
         const optionsAllQuestions = route.params.allQuestions.filter((aq) => aq.options.length > 0)
         emptyOptions(optionsAllQuestions)
         emptyQuestions()
-        // interstitial.show()
+        interstitial.show()
         navigation.navigate('Home')
     }
 
@@ -144,7 +160,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         setHelpType(help)
 
         if (help === 'add') {
-            // rewarded.show()
+            rewarded.show()
             setIsAdd(true)
         }
     }
@@ -167,45 +183,75 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         setInput(input + value)
     }
 
-    // useEffect(() => {
-    //     const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-    //         console.log("Loading add");
-    //     });
+    useEffect(() => {
+        if (sounds) {
+            return listen ? () => {
+                listen.unloadAsync();
+            } : undefined;
+        }
+    }, [listen]);
 
-    //     interstitial.load();
+    useEffect(() => {
+        (async () => {
+            if (sounds && isCorrect) {
+                await playAudio(require('../../assets/success.mp3'))
+                return
+            }
 
-    //     return unsubscribe;
-    // }, []);
+            if (sounds && isIncorrect) {
+                await playAudio(require('../../assets/error.mp3'))
+            }
+        })()
+    }, [isCorrect, isIncorrect])
 
-    // useEffect(() => {
-    //     const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
-    //         console.log("Loading add");
-    //     });
-    //     const unsubscribeEarned = rewarded.addAdEventListener(
-    //         RewardedAdEventType.EARNED_REWARD,
-    //         reward => {
-    //             console.log('User earned reward of ', reward);
-    //         },
-    //     );
+    useEffect(() => {
+        const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+            console.log("Loading add");
+        });
 
-    //     rewarded.load();
+        interstitial.load();
 
-    //     return () => {
-    //         unsubscribeLoaded();
-    //         unsubscribeEarned();
-    //     };
-    // }, []);
+        return unsubscribe;
+    }, []);
+
+    useEffect(() => {
+        const unsubscribeLoaded = rewarded.addAdEventListener(RewardedAdEventType.LOADED, () => {
+            console.log("Loading add");
+        });
+        const unsubscribeEarned = rewarded.addAdEventListener(
+            RewardedAdEventType.EARNED_REWARD,
+            reward => {
+                console.log('User earned reward of ', reward);
+            },
+        );
+
+        rewarded.load();
+
+        return () => {
+            unsubscribeLoaded();
+            unsubscribeEarned();
+        };
+    }, []);
 
     useEffect(() => {
 
         setStorage({
             amountQuestions,
-            categories,
-            helps
+            helps,
+            antonyms,
+            definitions,
+            synonyms,
+            sounds
         })
 
         if (!isGameError) {
-            countQuestion!(questions[numberQuestion].category)
+            if (route.params.game === 'definitions') {
+                countDefinitions!()
+            } else if (route.params.game === 'synonyms') {
+                countSynonyms!()
+            } else if (route.params.game === 'antonyms') {
+                countAntonyms!()
+            }
             setOptionsHelped(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], 6))
             return
         }
@@ -215,7 +261,13 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
 
     useEffect(() => {
         if (isCorrect && !isGameError) {
-            correctQuestion!(questions[numberQuestion].category)
+            if (route.params.game === 'definitions') {
+                correctDefinitions!()
+            } else if (route.params.game === 'synonyms') {
+                correctSynonyms!()
+            } else if (route.params.game === 'antonyms') {
+                correctAntonyms!()
+            }
         }
     }, [corrects])
 

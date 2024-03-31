@@ -9,22 +9,41 @@ export const optionsStyles = StyleSheet.create({
         alignItems: 'center'
     },
 
-    containerOptions: {
-        height: '58%',
+    containerSounds: {
+        height: '50%',
         width: '100%',
-        justifyContent: 'space-around',
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    containerButtonSounds: {
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: Dimensions.get("window").height / 86
+    },
+
+    buttonSounds: {
+        width: '50%',
+        padding: Dimensions.get("window").height / 106
+    },
+
+    textButtonSounds: {
+        fontSize: Dimensions.get("window").height / 41,
+        fontWeight: '600',
+        textAlign: 'center'
     },
 
     titleOption: {
-        fontSize: Dimensions.get("window").height / 41,
+        fontSize: Dimensions.get("window").height / 37,
         fontWeight: '500',
         color: '#ffffff',
         textAlign: 'center'
     },
 
     amountQuestionsText: {
-        fontSize: Dimensions.get("window").height / 41,
+        fontSize: Dimensions.get("window").height / 37,
         fontWeight: '500',
         color: '#ffffff',
         marginTop: Dimensions.get("window").height / 148,

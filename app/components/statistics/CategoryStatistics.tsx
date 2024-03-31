@@ -1,18 +1,17 @@
 import { View } from 'react-native'
 
+import CategoryStatistic from './components/CategoryStatistic'
+
 import { statisticsStyles } from '../../styles/statistics.styles'
 
-import { ICategory, IUser } from '../../interface/User'
-import CategoryStatistic from './components/CategoryStatistic'
+import { IUser } from '../../interface/User'
 
 const CategoryStatistics = ({ user }: { user: IUser }) => {
     return (
         <View style={statisticsStyles.containerCategoryStatistics}>
-            {
-                user.categories.map((category: ICategory) => {
-                    return <CategoryStatistic category={category} key={category.category} />
-                })
-            }
+            <CategoryStatistic statistic={user.definitions} text='Definiciones' />
+            <CategoryStatistic statistic={user.synonyms} text='Sinónimos' />
+            <CategoryStatistic statistic={user.antonyms} text='Antónimos' />
         </View>
     )
 }

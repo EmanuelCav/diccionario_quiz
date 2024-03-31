@@ -19,7 +19,7 @@ const Play = ({ navigation }: { navigation: StackNavigation }) => {
 
     return (
         <View style={generalStyles.containerGeneral}>
-            {/* <Banner /> */}
+            <Banner />
             <MenuPlay amountQuestions={amountQuestions} changeLoading={changeLoading} generateGame={generateGame} navigation={navigation} />
         </View>
     )

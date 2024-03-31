@@ -10,5 +10,13 @@ declare module '@env' {
     export const EXPO_APP_ID: string;
     export const EXPO_MEASUREMENT_ID: string;
     export const COLLECTION_QUESTIONS: string;
+    export const COLLECTION_SYNONYMS: string;
+    export const COLLECTION_ANTONYMS: string;
     export const EXPO_STORAGE: string;
 }
+
+// answer
+// category
+// text
+// isAnswer
+// options

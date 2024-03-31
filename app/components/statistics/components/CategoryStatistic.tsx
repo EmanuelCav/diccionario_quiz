@@ -1,17 +1,17 @@
 import { Text, View } from 'react-native'
 
-import { ICategory } from '../../../interface/User'
+import { CategoryStatisticPropsType } from '../../../types/props.types'
 
 import { statisticsStyles } from '../../../styles/statistics.styles'
 
-const CategoryStatistic = ({ category }: { category: ICategory }) => {
+const CategoryStatistic = ({ statistic, text }: CategoryStatisticPropsType) => {
     return (
         <View style={statisticsStyles.containerCategoryStatistic}>
-            <Text style={statisticsStyles.headerStatistics}>{category.category}</Text>
-            <Text style={statisticsStyles.statistic}>Preguntas: {category.questions}</Text>
+            <Text style={statisticsStyles.headerStatistics}>{text}</Text>
+            <Text style={statisticsStyles.statistic}>Preguntas: {statistic.amount}</Text>
             <Text style={statisticsStyles.statistic}>
-                Correctas: {category.corrects} {`(${category.questions > 0 ?
-                    ((category.corrects * 100) / category.questions).toFixed(2) : (0).toFixed(2)}%)`}
+                Correctas: {statistic.corrects} {`(${statistic.amount > 0 ?
+                    ((statistic.corrects * 100) / statistic.amount).toFixed(2) : (0).toFixed(2)}%)`}
             </Text>
         </View>
     )

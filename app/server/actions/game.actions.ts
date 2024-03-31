@@ -1,10 +1,10 @@
 import { IQuestion } from "../../interface/Game";
 import { StackNavigation } from "../../types/props.types";
-import { TextOptions } from "../../types/key.types";
+import { GameType, TextOptions } from "../../types/key.types";
 
 import { generateOptions, generateQuestions } from "../../helper/game";
 
-export const generateGameAction = (allQuestions: IQuestion[], navigation: StackNavigation, generateGame: (question: IQuestion) => void, amountQuestions: number, option: TextOptions) => {
+export const generateGameAction = (allQuestions: IQuestion[], navigation: StackNavigation, generateGame: (question: IQuestion) => void, amountQuestions: number, option: TextOptions, game: GameType) => {
 
     const questions = generateQuestions(allQuestions, amountQuestions)
 
@@ -16,7 +16,8 @@ export const generateGameAction = (allQuestions: IQuestion[], navigation: StackN
 
     navigation.navigate("Playing", {
         allQuestions,
-        option
+        option,
+        game
     })
 
 }

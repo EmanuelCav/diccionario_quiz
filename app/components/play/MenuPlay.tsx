@@ -1,6 +1,6 @@
-import { View } from "react-native"
+import { View, Text } from "react-native"
 import { useState, useEffect } from 'react'
-import { COLLECTION_QUESTIONS } from '@env'
+import { COLLECTION_ANTONYMS, COLLECTION_QUESTIONS, COLLECTION_SYNONYMS } from '@env'
 
 import ButtonMenuPlay from "./components/ButtonMenu"
 import ButtonMenu from "../components/ButtonMenu"
@@ -9,7 +9,7 @@ import { playStyles } from "../../styles/play.styles"
 
 import { IQuestion } from "../../interface/Game"
 import { MenuPlayPropsType } from "../../types/props.types"
-import { TextOptions } from "../../types/key.types"
+import { GameType, TextOptions } from "../../types/key.types"
 
 import { generateGameAction } from "../../server/actions/game.actions"
 
@@ -19,9 +19,11 @@ import { collection, onSnapshot } from 'firebase/firestore'
 const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: MenuPlayPropsType) => {
 
     const [questions, setQuestions] = useState<IQuestion[]>([])
+    const [synonyms, setSynonyms] = useState<IQuestion[]>([])
+    const [antonyms, setAntonyms] = useState<IQuestion[]>([])
 
-    const redirectPlaying = (option: TextOptions) => {
-        generateGameAction(questions, navigation, generateGame, amountQuestions, option)
+    const redirectPlaying = (option: TextOptions, gameQuestions: IQuestion[], game: GameType) => {
+        generateGameAction(gameQuestions, navigation, generateGame, amountQuestions, option, game)
     }
 
     const goBack = () => {
@@ -31,9 +33,11 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
     useEffect(() => {
 
         let questionsData: IQuestion[] = []
+        let synonymsData: IQuestion[] = []
+        let antonymsData: IQuestion[] = []
 
-        const collectionRef = collection(firestore, COLLECTION_QUESTIONS)
-        const suscriber = onSnapshot(collectionRef, {
+        const collectionQuestionsRef = collection(firestore, COLLECTION_QUESTIONS)
+        const suscriberQuestions = onSnapshot(collectionQuestionsRef, {
             next: (snapchot) => {
                 snapchot.docs.forEach((doc) => {
                     questionsData.push(doc.data() as IQuestion)
@@ -41,24 +45,47 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
             }
         })
 
+        const collectionSynonymsRef = collection(firestore, COLLECTION_SYNONYMS)
+        const suscriberSynonyms = onSnapshot(collectionSynonymsRef, {
+            next: (snapchot) => {
+                snapchot.docs.forEach((doc) => {
+                    synonymsData.push(doc.data() as IQuestion)
+                })
+            }
+        })
+
+        const collectionAntonymsRef = collection(firestore, COLLECTION_ANTONYMS)
+        const suscriberAntonyms = onSnapshot(collectionAntonymsRef, {
+            next: (snapchot) => {
+                snapchot.docs.forEach((doc) => {
+                    antonymsData.push(doc.data() as IQuestion)
+                })
+            }
+        })
+
         setQuestions(questionsData)
+        setSynonyms(synonymsData)
+        setAntonyms(antonymsData)
 
         setTimeout(() => {
             changeLoading(false)
-        }, 1850);
+        }, 2100);
 
         return () => {
-            suscriber()
+            suscriberQuestions()
+            suscriberSynonyms()
+            suscriberAntonyms()
         }
 
     }, [])
 
     return (
         <View style={playStyles.containerMenuPlay}>
-            <ButtonMenuPlay text="Definiciones" func={redirectPlaying} option="Sin opciones" />
-            <ButtonMenuPlay text="Sinónimos" func={redirectPlaying} option="Con opciones" />
-            <ButtonMenuPlay text="Antónimos" func={redirectPlaying} option="Con opciones" />
-            <ButtonMenuPlay text="Corrección gramatical" func={redirectPlaying} option="Con opciones" />
+            <Text style={playStyles.playTitle}>Selecciona una opción para iniciar</Text>
+            <ButtonMenuPlay text="Definiciones" func={redirectPlaying} option="Sin opciones" gameQuestions={questions} game='definitions' />
+            <ButtonMenuPlay text="Sinónimos" func={redirectPlaying} option="Con opciones" gameQuestions={synonyms} game='synonyms' />
+            <ButtonMenuPlay text="Antónimos" func={redirectPlaying} option="Con opciones" gameQuestions={antonyms} game='antonyms' />
+            {/* <ButtonMenuPlay text="Corrección gramatical" func={redirectPlaying} option="Con opciones" gameQuestions={questions} /> */}
             <ButtonMenu text="Regresar" func={goBack} />
         </View>
     )

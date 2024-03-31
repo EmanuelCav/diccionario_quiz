@@ -13,34 +13,36 @@ import { userStore } from '../server/user/store'
 import { changeOptionsAction } from "../server/actions/user.actions";
 
 import { setStorage } from "../helper/storage";
+import Sounds from "../components/options/Sounds";
 
 const Options = ({ navigation }: { navigation: StackNavigation }) => {
 
-    // const { amountOptions, amountQuestions, helps, categories, changeOptions } = userStore()
+    const { amountQuestions, helps, changeOptions, antonyms, definitions, synonyms, sounds, changeSounds } = userStore()
 
-    // const initialState = {
-    //     amountOptions: 0,
-    //     amountQuestions: 0
-    // }
+    const initialState: IOptions = {
+        amountQuestions
+    }
 
-    // const [optionsData, setOptionsData] = useState<IOptions>(initialState)
+    const [optionsData, setOptionsData] = useState<IOptions>(initialState)
 
-    // const goBack = () => {
-    //     setStorage({
-    //         amountOptions: optionsData.amountOptions,
-    //         amountQuestions: optionsData.amountQuestions,
-    //         categories,
-    //         helps
-    //     })
+    const goBack = () => {
+        setStorage({
+            amountQuestions,
+            helps,
+            antonyms,
+            definitions,
+            synonyms,
+            sounds
+        })
 
-    //     changeOptionsAction(optionsData, changeOptions!, navigation)
-    // }
+        changeOptionsAction(optionsData, changeOptions!, navigation)
+    }
 
     return (
         <View style={generalStyles.containerGeneral}>
-            {/* <AmountOptions amountOptions={optionsData.amountOptions} setOptionsData={setOptionsData} />
+            <Sounds sounds={sounds} changeSounds={changeSounds!} />
             <AmountQuestions amountQuestions={optionsData.amountQuestions} setOptionsData={setOptionsData} />
-            <ButtonAccept text='ACEPTAR' func={goBack} disabled={false} /> */}
+            <ButtonAccept text='ACEPTAR' func={goBack} />
         </View>
     )
 }
