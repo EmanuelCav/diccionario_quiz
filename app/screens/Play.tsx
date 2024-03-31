@@ -13,15 +13,14 @@ import { responseStore } from "../server/response/store"
 
 const Play = ({ navigation }: { navigation: StackNavigation }) => {
 
-    const { categories, amountQuestions, amountOptions } = userStore()
+    const { amountQuestions } = userStore()
     const { generateGame } = gameStore()
     const { changeLoading } = responseStore()
 
     return (
         <View style={generalStyles.containerGeneral}>
             {/* <Banner /> */}
-            <MenuPlay amountOptions={amountOptions} amountQuestions={amountQuestions} categories={categories} 
-            changeLoading={changeLoading} generateGame={generateGame} navigation={navigation} />
+            <MenuPlay amountQuestions={amountQuestions} changeLoading={changeLoading} generateGame={generateGame} navigation={navigation} />
         </View>
     )
 }

@@ -10,6 +10,7 @@ type Routes = {
     Home: undefined;
     Playing: {
         allQuestions: IQuestion[];
+        option: TextOptions;
     };
     Options: undefined;
     Categories: {
@@ -34,10 +35,15 @@ export type ButtonMenuPropsType = {
     func: () => void;
 }
 
+export type ButtonMenuPlayPropsType = {
+    text: string;
+    func: (option: TextOptions) => void;
+    option: TextOptions;
+}
+
 export type ButtonAcceptPropsType = {
     text: string;
     func: () => void;
-    disabled: boolean;
 }
 
 export type CategoriesPropsType = {
@@ -46,11 +52,9 @@ export type CategoriesPropsType = {
 }
 
 export type MenuPlayPropsType = {
+    amountQuestions: number;
     navigation: StackNavigation;
-    categories: ICategory[];
     generateGame: (question: IQuestion) => void; 
-    amountQuestions: number; 
-    amountOptions: TextOptions;
     changeLoading: (response: boolean) => void;
 }
 

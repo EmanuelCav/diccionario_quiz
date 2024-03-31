@@ -2,31 +2,26 @@ import { View } from "react-native"
 import { useState, useEffect } from 'react'
 import { COLLECTION_QUESTIONS } from '@env'
 
+import ButtonMenuPlay from "./components/ButtonMenu"
 import ButtonMenu from "../components/ButtonMenu"
 
 import { playStyles } from "../../styles/play.styles"
 
 import { IQuestion } from "../../interface/Game"
 import { MenuPlayPropsType } from "../../types/props.types"
+import { TextOptions } from "../../types/key.types"
 
 import { generateGameAction } from "../../server/actions/game.actions"
 
 import { firestore } from '../../../firebase.config'
 import { collection, onSnapshot } from 'firebase/firestore'
 
-const MenuPlay = ({ navigation, amountOptions, amountQuestions, generateGame, categories, changeLoading }: MenuPlayPropsType) => {
+const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: MenuPlayPropsType) => {
 
     const [questions, setQuestions] = useState<IQuestion[]>([])
 
-    const redirectPlaying = () => {
-        if (categories.filter(c => c.isSelect).length > 0) {
-            generateGameAction(questions, navigation, amountOptions, amountQuestions, generateGame, categories)
-            return
-        }
-
-        navigation.navigate('Categories', {
-            isCategory: false
-        })
+    const redirectPlaying = (option: TextOptions) => {
+        generateGameAction(questions, navigation, generateGame, amountQuestions, option)
     }
 
     const goBack = () => {
@@ -60,10 +55,10 @@ const MenuPlay = ({ navigation, amountOptions, amountQuestions, generateGame, ca
 
     return (
         <View style={playStyles.containerMenuPlay}>
-            <ButtonMenu text="Definiciones" func={redirectPlaying} />
-            <ButtonMenu text="Sinónimos" func={redirectPlaying} />
-            <ButtonMenu text="Antónimos" func={redirectPlaying} />
-            <ButtonMenu text="Corrección gramatical" func={redirectPlaying} />
+            <ButtonMenuPlay text="Definiciones" func={redirectPlaying} option="Sin opciones" />
+            <ButtonMenuPlay text="Sinónimos" func={redirectPlaying} option="Con opciones" />
+            <ButtonMenuPlay text="Antónimos" func={redirectPlaying} option="Con opciones" />
+            <ButtonMenuPlay text="Corrección gramatical" func={redirectPlaying} option="Con opciones" />
             <ButtonMenu text="Regresar" func={goBack} />
         </View>
     )

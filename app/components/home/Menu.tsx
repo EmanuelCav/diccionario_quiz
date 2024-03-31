@@ -31,7 +31,7 @@ const Menu = ({ navigation, changeLoading }: MenuPropsType) => {
         <View style={homeStyles.containerMenu}>
             <ButtonMenu text='INICIAR' func={redirectPlay} />
             <ButtonMenu text='CATEGORÍAS' func={redirectCategories} />
-            <ButtonMenu text='OPCIONES' func={redirectOptions} />
+            {/* <ButtonMenu text='OPCIONES' func={redirectOptions} /> */}
             <ButtonMenu text='ESTADÍSTICAS' func={redirectStatistics} />
         </View>
     )

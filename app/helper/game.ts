@@ -1,40 +1,24 @@
 import { IQuestion } from "../interface/Game";
-import { ICategory } from "../interface/User";
-import { TextOptions } from "../types/key.types";
 
 export const keyboard: string[][] = [['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
 ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Ñ'],
 ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '←', 'X!']]
 
-export const generateQuestions = (categories: ICategory[], allQuestions: IQuestion[], amountQuestions: number): IQuestion[] => {
-
-    let avaibleQuestions: IQuestion[] = []
-
-    for (let i = 0; i < categories.filter(c => c.isSelect).length; i++) {
-        const filterQuestions: IQuestion[] = allQuestions.filter(q => (q.category === categories.filter(c => c.isSelect)[i].category))
-
-        for (let j = 0; j < filterQuestions.length; j++) {
-            avaibleQuestions.push(filterQuestions[j])
-        }
-    }
-
-    return shuffle(avaibleQuestions).slice(0, amountQuestions)
-
+export const generateQuestions = (allQuestions: IQuestion[], amountQuestions: number): IQuestion[] => {
+    return shuffle(allQuestions).slice(0, amountQuestions)
 }
 
-export const generateOptions = (amountQuestions: number, allQuestions: IQuestion[], questions: IQuestion[], amountOptions: TextOptions): IQuestion[] => {
-
-    let isOptions = amountOptions !== 'Sin opciones'
+export const generateOptions = (amountQuestions: number, allQuestions: IQuestion[], questions: IQuestion[], amountOptions: number): IQuestion[] => {
 
     for (let i = 0; i < amountQuestions; i++) {
 
         const options: IQuestion[] = shuffle(allQuestions.filter(q => (q.category === questions[i].category) && (q.answer !== questions[i].answer)))
 
-        const optionRandom = Math.floor(Math.random() * (isOptions ? Number(amountOptions) : 6))
+        const optionRandom = Math.floor(Math.random() * amountOptions)
 
         if (questions[i].options.length > 0) continue
 
-        for (let j = 0; j < (isOptions ? Number(amountOptions) : 6); j++) {
+        for (let j = 0; j < amountOptions; j++) {
 
             if (j === optionRandom) {
                 questions[i].options.push(questions[i].answer)
@@ -60,12 +44,12 @@ export const verifyValue = (value: string, answer: string): string => {
         let count = 0
 
         for (let i = 0; i < answer.length; i++) {
-            if(answer[i] === mainValue[i]) {
+            if (answer[i] === mainValue[i]) {
                 count++
             }
         }
 
-        if(count >= (answer.length - Math.floor(answer.length / 4))) {
+        if (count >= (answer.length - Math.floor(answer.length / 4))) {
             return answer
         }
     }

@@ -37,7 +37,7 @@ import { setStorage } from '../helper/storage'
 
 const Playing = ({ navigation, route }: PlayingPropsType) => {
 
-    const { amountOptions, amountQuestions, categories, correctQuestion, countQuestion, helps, changeHelps } = userStore()
+    const { amountQuestions, categories, correctQuestion, countQuestion, helps, changeHelps } = userStore()
     const { questions, emptyQuestions } = gameStore()
 
     const [input, setInput] = useState<string>('')
@@ -58,7 +58,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     const [errors, setErrors] = useState<IQuestion[]>([])
     const [gameErrors, setGameErrors] = useState<IQuestion[]>([])
 
-    const [optionsHelped, setOptionsHelped] = useState<string[]>(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], Number(amountOptions)))
+    const [optionsHelped, setOptionsHelped] = useState<string[]>(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], 6))
 
     const nextQuestion = (value: string) => {
 
@@ -199,7 +199,6 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     useEffect(() => {
 
         setStorage({
-            amountOptions,
             amountQuestions,
             categories,
             helps
@@ -207,11 +206,11 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
 
         if (!isGameError) {
             countQuestion!(questions[numberQuestion].category)
-            setOptionsHelped(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], Number(amountOptions)))
+            setOptionsHelped(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], 6))
             return
         }
 
-        setOptionsHelped(helpsOptions(questions[numberQuestion].options, gameErrors[numberQuestion], Number(amountOptions)))
+        setOptionsHelped(helpsOptions(questions[numberQuestion].options, gameErrors[numberQuestion], 6))
     }, [numberQuestion])
 
     useEffect(() => {
@@ -240,20 +239,20 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
         <View style={generalStyles.containerGeneral}>
             <Question question={!isGameError ? questions[numberQuestion] : gameErrors[numberQuestion]} />
             <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp}
-                isOptions={amountOptions !== 'Sin opciones'} handleQuit={handleQuit} />
+                isOptions={route.params.option !== 'Sin opciones'} handleQuit={handleQuit} />
             {
                 (isCorrect || isIncorrect) ?
                     <Answer answer={isCorrect} correctAnswer={!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer} continueGame={continueGame} />
-                    : amountOptions === 'Sin opciones' ? (
+                    : route.params.option === 'Sin opciones' ? (
                         <>
                             {
-                                isHelped ? <Options options={!isGameError ? questions[numberQuestion].options : gameErrors[numberQuestion].options} nextQuestion={nextQuestion} amountOptions={Number(amountOptions)}
+                                isHelped ? <Options options={!isGameError ? questions[numberQuestion].options : gameErrors[numberQuestion].options} nextQuestion={nextQuestion} amountOptions={6}
                                     optionsHelped={optionsHelped} isHelped={isHelped} />
                                     : <Keyboard keyboard={keyboard} handleChange={handleChange} input={input} nextQuestion={nextQuestion} />
                             }
                         </>
                     ) : (
-                        <Options options={!isGameError ? questions[numberQuestion].options : gameErrors[numberQuestion].options} nextQuestion={nextQuestion} amountOptions={Number(amountOptions)}
+                        <Options options={!isGameError ? questions[numberQuestion].options : gameErrors[numberQuestion].options} nextQuestion={nextQuestion} amountOptions={6}
                             optionsHelped={optionsHelped} isHelped={isHelped} />
                     )
             }
