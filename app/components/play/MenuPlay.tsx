@@ -1,6 +1,6 @@
 import { View, Text } from "react-native"
 import { useState, useEffect } from 'react'
-import { COLLECTION_ANTONYMS, COLLECTION_QUESTIONS, COLLECTION_SYNONYMS } from '@env'
+import { COLLECTION_ANTONYMS, COLLECTION_CORRECTIONS, COLLECTION_QUESTIONS, COLLECTION_SYNONYMS } from '@env'
 
 import ButtonMenuPlay from "./components/ButtonMenu"
 import ButtonMenu from "../components/ButtonMenu"
@@ -21,6 +21,7 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
     const [questions, setQuestions] = useState<IQuestion[]>([])
     const [synonyms, setSynonyms] = useState<IQuestion[]>([])
     const [antonyms, setAntonyms] = useState<IQuestion[]>([])
+    const [corrections, setCorrections] = useState<IQuestion[]>([])
 
     const redirectPlaying = (option: TextOptions, gameQuestions: IQuestion[], game: GameType) => {
         generateGameAction(gameQuestions, navigation, generateGame, amountQuestions, option, game)
@@ -35,6 +36,7 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
         let questionsData: IQuestion[] = []
         let synonymsData: IQuestion[] = []
         let antonymsData: IQuestion[] = []
+        let correctionsData: IQuestion[] = []
 
         const collectionQuestionsRef = collection(firestore, COLLECTION_QUESTIONS)
         const suscriberQuestions = onSnapshot(collectionQuestionsRef, {
@@ -63,18 +65,29 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
             }
         })
 
+        const collectionCorrectionsRef = collection(firestore, COLLECTION_CORRECTIONS)
+        const suscriberCorrections = onSnapshot(collectionCorrectionsRef, {
+            next: (snapchot) => {
+                snapchot.docs.forEach((doc) => {
+                    correctionsData.push(doc.data() as IQuestion)
+                })
+            }
+        })
+
         setQuestions(questionsData)
         setSynonyms(synonymsData)
         setAntonyms(antonymsData)
+        setCorrections(correctionsData)
 
         setTimeout(() => {
             changeLoading(false)
-        }, 2100);
+        }, 2622);
 
         return () => {
             suscriberQuestions()
             suscriberSynonyms()
             suscriberAntonyms()
+            suscriberCorrections()
         }
 
     }, [])
@@ -85,7 +98,7 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
             <ButtonMenuPlay text="Definiciones" func={redirectPlaying} option="Sin opciones" gameQuestions={questions} game='definitions' />
             <ButtonMenuPlay text="Sinónimos" func={redirectPlaying} option="Con opciones" gameQuestions={synonyms} game='synonyms' />
             <ButtonMenuPlay text="Antónimos" func={redirectPlaying} option="Con opciones" gameQuestions={antonyms} game='antonyms' />
-            {/* <ButtonMenuPlay text="Corrección gramatical" func={redirectPlaying} option="Con opciones" gameQuestions={questions} /> */}
+            <ButtonMenuPlay text="Correcciones Ortográficas" func={redirectPlaying} option="Con opciones" gameQuestions={corrections} game='correction' />
             <ButtonMenu text="Regresar" func={goBack} />
         </View>
     )

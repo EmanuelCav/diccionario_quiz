@@ -38,7 +38,7 @@ const rewarded = RewardedAd.createForAdRequest(adUnitIdReward, {
 
 const Playing = ({ navigation, route }: PlayingPropsType) => {
 
-    const { antonyms, definitions, synonyms, amountQuestions, correctDefinitions, countDefinitions, countAntonyms, correctAntonyms, countSynonyms, correctSynonyms, helps, changeHelps, sounds } = userStore()
+    const { antonyms, definitions, synonyms, amountQuestions, correctDefinitions, countDefinitions, countAntonyms, correctAntonyms, countSynonyms, correctSynonyms, helps, corrections, changeHelps, sounds, correctCorrection, countCorrection } = userStore()
     const { questions, emptyQuestions } = gameStore()
 
     const [input, setInput] = useState<string>('')
@@ -127,11 +127,10 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     }
 
     const continueHome = () => {
-        // for (let i = 0; i < route.params.allQuestions.length; i++) {
-        //     console.log(route.params.allQuestions[i]);
-        // }
-        const optionsAllQuestions = route.params.allQuestions.filter((aq) => aq.options.length > 0)
-        emptyOptions(optionsAllQuestions)
+        if (route.params.game !== 'correction') {
+            const optionsAllQuestions = route.params.allQuestions.filter((aq) => aq.options.length > 0)
+            emptyOptions(optionsAllQuestions)
+        }
         emptyQuestions()
         interstitial.show()
         navigation.navigate('Home')
@@ -237,6 +236,7 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
 
         setStorage({
             amountQuestions,
+            corrections,
             helps,
             antonyms,
             definitions,
@@ -251,6 +251,8 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
                 countSynonyms!()
             } else if (route.params.game === 'antonyms') {
                 countAntonyms!()
+            } else {
+                countCorrection!()
             }
             setOptionsHelped(helpsOptions(questions[numberQuestion].options, questions[numberQuestion], 6))
             return
@@ -267,6 +269,8 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
                 correctSynonyms!()
             } else if (route.params.game === 'antonyms') {
                 correctAntonyms!()
+            } else {
+                correctCorrection!()
             }
         }
     }, [corrects])
@@ -290,8 +294,8 @@ const Playing = ({ navigation, route }: PlayingPropsType) => {
     return (
         <View style={generalStyles.containerGeneral}>
             <Question question={!isGameError ? questions[numberQuestion] : gameErrors[numberQuestion]} />
-            <GameStatistics questions={questions} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp}
-                isOptions={route.params.option !== 'Sin opciones'} handleQuit={handleQuit} />
+            <GameStatistics questions={!isGameError ? questions : gameErrors} numberQuestion={numberQuestion + 1} helps={helps} isHelped={isCorrect || isIncorrect || isHelped || helps === 0} handleHelp={handleHelp}
+                isOptions={route.params.option !== 'Sin opciones'} isQuit={isCorrect || isIncorrect} handleQuit={handleQuit} />
             {
                 (isCorrect || isIncorrect) ?
                     <Answer answer={isCorrect} correctAnswer={!isGameError ? questions[numberQuestion].answer : gameErrors[numberQuestion].answer} continueGame={continueGame} />

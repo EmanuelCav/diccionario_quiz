@@ -35,6 +35,16 @@ export const generateOptions = (amountQuestions: number, allQuestions: IQuestion
 
 }
 
+export const shuffledOptions = (questions: IQuestion[]): IQuestion[] => {
+
+    for (let i = 0; i < questions.length; i++) {
+        shuffle(questions[i].options)
+    }
+
+    return questions
+
+}
+
 export const verifyValue = (value: string, answer: string): string => {
 
     let mainValue = value.trim()

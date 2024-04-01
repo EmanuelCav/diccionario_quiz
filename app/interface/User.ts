@@ -5,6 +5,7 @@ export interface IUser {
     definitions: IStatistic;
     antonyms: IStatistic;
     synonyms: IStatistic;
+    corrections: IStatistic;
     amountQuestions: number;
     helps: number;
     changeOptions?: (optionsData: IOptions) => void;
@@ -14,6 +15,8 @@ export interface IUser {
     correctSynonyms?: () => void;
     countAntonyms?: () => void;
     correctAntonyms?: () => void;
+    countCorrection?: () => void;
+    correctCorrection?: () => void;
     changeHelps?: (number: number) => void;
     changeSounds?: () => void;
     userStorage?: (storage: any) => void;

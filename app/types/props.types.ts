@@ -93,6 +93,7 @@ export type GameStatisticsPropsType = {
     handleHelp: (help: HelpType) => void;
     isOptions: boolean;
     handleQuit: () => void;
+    isQuit: boolean;
 }
 
 export type CategoryStatisticPropsType = {
@@ -146,6 +147,7 @@ export type HelpsPropsType = {
     handleHelp: (help: HelpType) => void;
     isOptions: boolean;
     handleQuit: () => void;
+    isQuit: boolean;
 }
 
 export type KeyboardPropsType = {

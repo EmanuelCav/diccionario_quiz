@@ -5,7 +5,7 @@ import { playingStyles } from '../../../../styles/playing.styles'
 
 import { HelpsPropsType } from '../../../../types/props.types'
 
-const Helps = ({ helps, isHelped, handleHelp, isOptions, handleQuit }: HelpsPropsType) => {
+const Helps = ({ helps, isHelped, handleHelp, isOptions, handleQuit, isQuit }: HelpsPropsType) => {
     return (
         <View style={playingStyles.containerHelps}>
             <Pressable style={({ pressed }) => [
@@ -20,18 +20,18 @@ const Helps = ({ helps, isHelped, handleHelp, isOptions, handleQuit }: HelpsProp
                     <Icon name='clipboard-list' color='#ffffff' size={Dimensions.get("window").height / 41} />
                     <Text style={[playingStyles.textGameStatistics, { marginLeft: Dimensions.get("window").width / 120 }]}>
                         {
-                            isOptions ? 'Filtrar' : 'Opciones'
+                            isOptions ? 'Ayuda' : 'Opciones'
                         }
                     </Text>
                 </View>
             </Pressable>
             <Pressable style={({ pressed }) => [
                 {
-                    backgroundColor: pressed ? '#f99aaa' : '#f1889b',
+                    backgroundColor: pressed ? '#f99aaa' : `${isQuit ? '#dddddd' : '#f1889b'}`,
                     width: '26%'
                 },
                 playingStyles.containerHelpButton
-            ]} onPress={handleQuit}>
+            ]} onPress={handleQuit} disabled={isQuit}>
                 <Text style={[playingStyles.textGameStatistics, { marginLeft: Dimensions.get("window").width / 120 }]}>
                     Saltar
                 </Text>

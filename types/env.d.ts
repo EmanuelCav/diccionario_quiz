@@ -12,11 +12,6 @@ declare module '@env' {
     export const COLLECTION_QUESTIONS: string;
     export const COLLECTION_SYNONYMS: string;
     export const COLLECTION_ANTONYMS: string;
+    export const COLLECTION_CORRECTIONS: string;
     export const EXPO_STORAGE: string;
 }
-
-// answer
-// category
-// text
-// isAnswer
-// options

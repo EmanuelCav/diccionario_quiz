@@ -19,6 +19,11 @@ export const userStore = create<IUser>()((set) => ({
         amount: 0,
         corrects: 0
     },
+    corrections: {
+        name: 'correction',
+        amount: 0,
+        corrects: 0,
+    },
     amountQuestions: 5,
     helps: 5,
     countDefinitions: () => set((state) => ({
@@ -61,6 +66,20 @@ export const userStore = create<IUser>()((set) => ({
             name: state.antonyms.name,
             corrects: state.antonyms.corrects + 1,
             amount: state.antonyms.amount
+        }
+    })),
+    countCorrection: () => set((state) => ({
+        corrections: {
+            name: state.corrections.name,
+            corrects: state.corrections.corrects,
+            amount: state.corrections.amount + 1
+        }
+    })),
+    correctCorrection: () => set((state) => ({
+        corrections: {
+            name: state.corrections.name,
+            corrects: state.corrections.corrects + 1,
+            amount: state.corrections.amount
         }
     })),
     changeOptions: (optionsData: IOptions) => set((state) => ({

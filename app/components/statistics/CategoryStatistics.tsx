@@ -12,6 +12,7 @@ const CategoryStatistics = ({ user }: { user: IUser }) => {
             <CategoryStatistic statistic={user.definitions} text='Definiciones' />
             <CategoryStatistic statistic={user.synonyms} text='Sinónimos' />
             <CategoryStatistic statistic={user.antonyms} text='Antónimos' />
+            <CategoryStatistic statistic={user.corrections} text='Correcciones Ortográficas' />
         </View>
     )
 }
