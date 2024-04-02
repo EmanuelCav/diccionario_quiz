@@ -4,12 +4,11 @@ import { homeStyles } from '../../styles/home.styles'
 
 import ButtonMenu from '../components/ButtonMenu'
 
-import { MenuPropsType } from '../../types/props.types'
+import { StackNavigation } from '../../types/props.types'
 
-const Menu = ({ navigation, changeLoading }: MenuPropsType) => {
+const Menu = ({ navigation }: { navigation: StackNavigation }) => {
 
     const redirectPlay = () => {
-        changeLoading(true)
         navigation.navigate('Play')
     }
 

@@ -34,9 +34,8 @@ export type ButtonMenuPropsType = {
 
 export type ButtonMenuPlayPropsType = {
     text: string;
-    func: (option: TextOptions, gameQuestions: IQuestion[], game: GameType) => void;
+    func: (option: TextOptions, game: GameType) => void;
     option: TextOptions;
-    gameQuestions: IQuestion[];
     game: GameType;
 }
 
@@ -49,11 +48,6 @@ export type MenuPlayPropsType = {
     amountQuestions: number;
     navigation: StackNavigation;
     generateGame: (question: IQuestion) => void; 
-    changeLoading: (response: boolean) => void;
-}
-
-export type MenuPropsType = {
-    navigation: StackNavigation;
     changeLoading: (response: boolean) => void;
 }
 

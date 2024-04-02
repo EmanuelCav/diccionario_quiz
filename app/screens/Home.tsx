@@ -36,7 +36,7 @@ const Home = ({ navigation }: { navigation: StackNavigation }) => {
     <View style={generalStyles.containerGeneral}>
       <Banner />
       <TitleHome />
-      <Menu navigation={navigation} changeLoading={changeLoading} />
+      <Menu navigation={navigation} />
     </View>
   )
 }

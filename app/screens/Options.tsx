@@ -17,7 +17,7 @@ import Sounds from "../components/options/Sounds";
 
 const Options = ({ navigation }: { navigation: StackNavigation }) => {
 
-    const { amountQuestions, helps, changeOptions, antonyms, definitions, synonyms, sounds, changeSounds } = userStore()
+    const { amountQuestions, helps, changeOptions, antonyms, definitions, synonyms, sounds, corrections, changeSounds } = userStore()
 
     const initialState: IOptions = {
         amountQuestions
@@ -32,7 +32,8 @@ const Options = ({ navigation }: { navigation: StackNavigation }) => {
             antonyms,
             definitions,
             synonyms,
-            sounds
+            sounds,
+            corrections
         })
 
         changeOptionsAction(optionsData, changeOptions!, navigation)
