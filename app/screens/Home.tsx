@@ -10,14 +10,12 @@ import TitleHome from '../components/home/TitleHome'
 import { StackNavigation } from '../types/props.types'
 
 import { userStore } from '../server/user/store'
-import { responseStore } from '../server/response/store'
 
 import { getStorage } from '../helper/storage'
 
 const Home = ({ navigation }: { navigation: StackNavigation }) => {
 
   const { userStorage } = userStore()
-  const { changeLoading } = responseStore()
 
   useEffect(() => {
 

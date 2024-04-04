@@ -92,13 +92,13 @@ const MenuPlay = ({ navigation, generateGame, changeLoading, amountQuestions }: 
         let gameQuestions: IQuestion[] = []
 
         if (game === 'correction') {
-            gameQuestions = getDefinitions()
+            gameQuestions = getCorrections()
         } else if (game === 'synonyms') {
             gameQuestions = getSynonyms()
         } else if (game === 'antonyms') {
             gameQuestions = getAntonyms()
         } else {
-            gameQuestions = getCorrections()
+            gameQuestions = getDefinitions()
         }
 
         setTimeout(() => {

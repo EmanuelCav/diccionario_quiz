@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View } from 'react-native'
 
+import Sounds from "../components/options/Sounds";
 import ButtonAccept from '../components/components/ButtonAccept'
 import AmountQuestions from '../components/options/AmountQuestions'
 
@@ -13,7 +14,6 @@ import { userStore } from '../server/user/store'
 import { changeOptionsAction } from "../server/actions/user.actions";
 
 import { setStorage } from "../helper/storage";
-import Sounds from "../components/options/Sounds";
 
 const Options = ({ navigation }: { navigation: StackNavigation }) => {
 
