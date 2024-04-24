@@ -13,14 +13,14 @@ export const statisticsStyles = StyleSheet.create({
     containerCategoryStatistics: {
         flex: 1,
         width: '100%',
-        paddingVertical: Dimensions.get("window").height / 106
+        backgroundColor: '#f1889b'
     },
 
     containerCategoryStatistic: {
         padding: Dimensions.get("window").height / 106,
         borderWidth: 2,
         borderStyle: 'solid',
-        borderColor: '#f1889b',
+        borderColor: '#ffffff',
         width: '100%',
         flex: 1,
         alignItems: 'flex-start',
@@ -29,7 +29,7 @@ export const statisticsStyles = StyleSheet.create({
 
     headerStatistics: {
         fontSize: Dimensions.get("window").height / 37,
-        color: '#f1889b',
+        color: '#FD234A',
         fontWeight: '500'
     },
 
