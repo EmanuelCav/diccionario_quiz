@@ -1,6 +1,6 @@
-<h1 align="center">Diccionario Quiz</h1>
+<h1 align="center">Vocabulario Quiz</h1>
 <div align="center">
-  <img src="https://res.cloudinary.com/projects-emanuek/image/upload/v1710109690/portfolio/icon_ghq13k.png" width="40%" />
+  <img src="https://res.cloudinary.com/projects-emanuek/image/upload/v1714063255/portfolio/logo_sdtg9v.png" width="40%" />
 </div>
 
 <h3>Mobile application to guess the dictionary word from a dictionary definition. The game contains a series of quizzes or crossword puzzles of dictionary definitions where you will have to guess the right word</h3>
